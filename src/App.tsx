@@ -2,25 +2,26 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { SearchAndFilters } from './components/SearchAndFilters';
 import { ItemCard } from './components/ItemCard';
+import { HacksSection } from './components/HacksSection';
 import { NuancesGuide } from './components/NuancesGuide';
 import { ALL_BENEFITS } from './data/allBenefits';
-import { BenefitItem, CategoryType } from './types';
-import { BookmarkCheck, Trash2, ExternalLink } from 'lucide-react';
+import { BenefitItem, CategoryType, FounderType } from './types';
+import { Trash2 } from 'lucide-react';
 
 export const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'directory' | 'nuances' | 'bookmarks'>('directory');
+  const [currentView, setCurrentView] = useState<'directory' | 'hacks' | 'nuances' | 'bookmarks'>('directory');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>('all');
-  const [selectedState, setSelectedState] = useState('All India');
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedState, setSelectedState] = useState('All States / Central');
+  const [selectedFounderType, setSelectedFounderType] = useState<FounderType>('all');
 
-  // Bookmarks stored in localStorage (no login required)
+  // Bookmarks stored in localStorage (zero login)
   const [bookmarkedIds, setBookmarkedIds] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem('founder_perks_bookmarks');
-      return saved ? JSON.parse(saved) : ['dpiit-startup-recognition', 'sisfs-seed-fund-scheme', 'microsoft-founders-hub'];
+      return saved ? JSON.parse(saved) : ['dpiit-startup-recognition', 'rajasthan-istart', 'sisfs-seed-fund-scheme'];
     } catch {
-      return ['dpiit-startup-recognition', 'sisfs-seed-fund-scheme', 'microsoft-founders-hub'];
+      return ['dpiit-startup-recognition', 'rajasthan-istart', 'sisfs-seed-fund-scheme'];
     }
   });
 
@@ -41,33 +42,47 @@ export const App: React.FC = () => {
   // Filtered benefits for Directory
   const filteredBenefits = useMemo(() => {
     return ALL_BENEFITS.filter(item => {
-      if (selectedCategory !== 'all' && item.category !== selectedCategory) {
-        return false;
+      // 1. Category Filter
+      if (selectedCategory !== 'all') {
+        if (selectedCategory === 'sustenance') {
+          if (item.category !== 'sustenance') return false;
+        } else if (item.category !== selectedCategory) {
+          return false;
+        }
       }
-      if (selectedState !== 'All India') {
-        const matchesState = item.statesApplicable?.includes(selectedState) || item.statesApplicable?.includes('All India');
+
+      // 2. State Filter
+      if (selectedState !== 'All States / Central') {
+        const matchesState = 
+          item.stateOrRegion === selectedState || 
+          item.stateOrRegion === 'All States / Central';
         if (!matchesState) return false;
       }
-      if (selectedTag) {
-        const matchesTag = item.tags.some(t => t.toLowerCase() === selectedTag.toLowerCase()) ||
-          item.title.toLowerCase().includes(selectedTag.toLowerCase()) ||
-          item.keyPerks.some(p => p.toLowerCase().includes(selectedTag.toLowerCase()));
-        if (!matchesTag) return false;
+
+      // 3. Founder Type Filter
+      if (selectedFounderType !== 'all') {
+        if (!item.founderTypes.includes('all') && !item.founderTypes.includes(selectedFounderType)) {
+          return false;
+        }
       }
+
+      // 4. Search Query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matchesTitle = item.title.toLowerCase().includes(q);
         const matchesProvider = item.provider.toLowerCase().includes(q);
+        const matchesState = item.stateOrRegion.toLowerCase().includes(q);
         const matchesDesc = item.shortDescription.toLowerCase().includes(q);
-        const matchesPerks = item.keyPerks.some(p => p.toLowerCase().includes(q));
+        const matchesHack = item.hackOrNuance.toLowerCase().includes(q);
         const matchesTags = item.tags.some(t => t.toLowerCase().includes(q));
-        if (!matchesTitle && !matchesProvider && !matchesDesc && !matchesPerks && !matchesTags) {
+        if (!matchesTitle && !matchesProvider && !matchesState && !matchesDesc && !matchesHack && !matchesTags) {
           return false;
         }
       }
+
       return true;
     });
-  }, [selectedCategory, selectedState, selectedTag, searchQuery]);
+  }, [selectedCategory, selectedState, selectedFounderType, searchQuery]);
 
   const bookmarkedItems = useMemo(() => {
     return ALL_BENEFITS.filter(item => bookmarkedIds.includes(item.id));
@@ -75,19 +90,19 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
-      {/* Clean Navbar */}
+      {/* Top Navigation */}
       <Navbar
         currentView={currentView}
         setCurrentView={setCurrentView}
         bookmarksCount={bookmarkedIds.length}
       />
 
-      {/* Main Content Area: Mobile-First, max-w-4xl */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-5 space-y-5">
+      {/* Main Container: Mobile-First, max-w-4xl */}
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-4 space-y-4">
         {/* VIEW 1: DIRECTORY */}
         {currentView === 'directory' && (
-          <div className="space-y-4">
-            {/* Search and Quick Category/Tag Navigation */}
+          <div className="space-y-3.5">
+            {/* Search and High-Utility Filters */}
             <SearchAndFilters
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
@@ -95,24 +110,24 @@ export const App: React.FC = () => {
               setSelectedCategory={setSelectedCategory}
               selectedState={selectedState}
               setSelectedState={setSelectedState}
-              selectedTag={selectedTag}
-              setSelectedTag={setSelectedTag}
+              selectedFounderType={selectedFounderType}
+              setSelectedFounderType={setSelectedFounderType}
               totalResults={filteredBenefits.length}
             />
 
-            {/* List of Benefits Cards */}
+            {/* List of Benefit Cards */}
             {filteredBenefits.length === 0 ? (
               <div className="text-center py-12 bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-2">
-                <div className="text-2xl">🔍</div>
-                <div className="text-sm font-bold text-white">No results found</div>
+                <div className="text-xl">🔍</div>
+                <div className="text-xs text-slate-400">No schemes found matching criteria.</div>
                 <button
                   onClick={() => {
                     setSearchQuery('');
                     setSelectedCategory('all');
-                    setSelectedState('All India');
-                    setSelectedTag(null);
+                    setSelectedState('All States / Central');
+                    setSelectedFounderType('all');
                   }}
-                  className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-semibold"
+                  className="px-3 py-1 bg-indigo-600 text-white rounded-lg text-xs font-semibold"
                 >
                   Reset
                 </button>
@@ -132,24 +147,19 @@ export const App: React.FC = () => {
           </div>
         )}
 
-        {/* VIEW 2: NUANCES & TRAPS */}
-        {currentView === 'nuances' && (
-          <div className="space-y-4">
-            <div className="text-left py-2">
-              <h2 className="text-lg font-bold text-white">Founder Nuances & Traps</h2>
-              <p className="text-xs text-slate-400">Essential regulatory fine print founders usually miss.</p>
-            </div>
-            <NuancesGuide />
-          </div>
-        )}
+        {/* VIEW 2: FOUNDER HACKS & CROSS-STATE ARBITRAGE */}
+        {currentView === 'hacks' && <HacksSection />}
 
-        {/* VIEW 3: SAVED PERKS */}
+        {/* VIEW 3: NUANCES & TRAPS */}
+        {currentView === 'nuances' && <NuancesGuide />}
+
+        {/* VIEW 4: SAVED PERKS */}
         {currentView === 'bookmarks' && (
-          <div className="space-y-4">
+          <div className="space-y-3.5">
             <div className="flex items-center justify-between py-1">
               <div>
-                <h2 className="text-lg font-bold text-white">Saved ({bookmarkedItems.length})</h2>
-                <p className="text-xs text-slate-400">Locally saved to your browser.</p>
+                <h2 className="text-base font-bold text-white">Saved Programs ({bookmarkedItems.length})</h2>
+                <p className="text-xs text-slate-400">Stored locally in your browser.</p>
               </div>
 
               {bookmarkedItems.length > 0 && (
@@ -165,7 +175,7 @@ export const App: React.FC = () => {
 
             {bookmarkedItems.length === 0 ? (
               <div className="text-center py-12 bg-slate-900/40 rounded-2xl border border-slate-800 p-6 space-y-1 text-slate-400 text-xs">
-                <div>No saved perks yet.</div>
+                <div>No saved items yet.</div>
                 <div>Tap the bookmark icon on any scheme to pin it here.</div>
               </div>
             ) : (
@@ -184,10 +194,10 @@ export const App: React.FC = () => {
         )}
       </main>
 
-      {/* Minimal Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-6 text-center text-[11px] text-slate-400">
+      {/* Minimal Clean Footer */}
+      <footer className="border-t border-slate-900 bg-slate-950 py-5 text-center text-[11px] text-slate-400">
         <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
-          <span>FounderPerks • Open Founder Knowledge Base</span>
+          <span>FounderPerks • Open Startup Schemes Database</span>
           <a
             href="https://github.com/dhruvabalde-prog/founder-benefits-directory"
             target="_blank"

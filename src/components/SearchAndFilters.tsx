@@ -1,7 +1,7 @@
 import React from 'react';
 import { Search, X, MapPin } from 'lucide-react';
-import { CategoryType } from '../types';
-import { STATES_LIST } from '../data/matrix';
+import { CategoryType, FounderType } from '../types';
+import { ALL_INDIAN_STATES } from '../data/allStates';
 
 interface SearchAndFiltersProps {
   searchQuery: string;
@@ -10,27 +10,29 @@ interface SearchAndFiltersProps {
   setSelectedCategory: (cat: CategoryType) => void;
   selectedState: string;
   setSelectedState: (state: string) => void;
-  selectedTag: string | null;
-  setSelectedTag: (tag: string | null) => void;
+  selectedFounderType: FounderType;
+  setSelectedFounderType: (ft: FounderType) => void;
   totalResults: number;
 }
 
-const CATEGORY_TABS: { id: CategoryType; label: string; icon: string }[] = [
-  { id: 'all', label: 'All', icon: '⚡' },
-  { id: 'government', label: 'Govt Schemes', icon: '🏛️' },
-  { id: 'banking', label: 'Banking', icon: '🏦' },
-  { id: 'saas_perks', label: 'Free Credits', icon: '☁️' }
+const CATEGORY_TABS: { id: CategoryType; label: string }[] = [
+  { id: 'all', label: 'All' },
+  { id: 'government', label: 'Govt Grants' },
+  { id: 'sustenance', label: 'Monthly Stipends' },
+  { id: 'banking', label: 'Banking' },
+  { id: 'saas_perks', label: 'Free Credits' }
 ];
 
-const ARCHETYPE_CHIPS = [
-  { tag: 'Bootstrapped', label: 'Bootstrapped' },
-  { tag: 'Women Founders', label: 'Women >51%' },
-  { tag: 'Non-dilutive', label: 'Grants' },
-  { tag: 'Zero Balance', label: 'Zero Balance' },
-  { tag: 'Tax Exemption', label: 'Tax Holiday' },
-  { tag: 'AI / LLM', label: 'AI & LLM' },
-  { tag: 'Biotech', label: 'BioTech' },
-  { tag: 'Delaware C-Corp', label: 'US Delaware' }
+const FOUNDER_FILTERS: { id: FounderType; label: string }[] = [
+  { id: 'all', label: 'All Founders' },
+  { id: 'bootstrapped', label: 'Bootstrapped' },
+  { id: 'women', label: 'Women >51%' },
+  { id: 'deeptech_ai', label: 'AI / DeepTech' },
+  { id: 'hardware', label: 'Hardware' },
+  { id: 'biotech', label: 'BioTech' },
+  { id: 'student', label: 'Student' },
+  { id: 'sc_st', label: 'SC/ST' },
+  { id: 'vc_backed', label: 'Funded' }
 ];
 
 export const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
@@ -40,103 +42,108 @@ export const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
   setSelectedCategory,
   selectedState,
   setSelectedState,
-  selectedTag,
-  setSelectedTag,
+  selectedFounderType,
+  setSelectedFounderType,
   totalResults
 }) => {
   return (
-    <div className="space-y-3">
-      {/* Search Bar + State Select */}
+    <div className="space-y-2.5">
+      {/* Search Input + State Selector */}
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Search schemes, banks, credits, rules..."
+            placeholder="Search schemes, states, banks, credits, rules..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-9 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+            className="w-full pl-9 pr-8 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-indigo-500 transition-colors"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1"
             >
               <X className="w-3.5 h-3.5" />
             </button>
           )}
         </div>
 
-        {/* State select */}
+        {/* State Filter Dropdown (All Indian States) */}
         <div className="relative shrink-0">
           <select
             value={selectedState}
             onChange={(e) => setSelectedState(e.target.value)}
-            className="pl-3 pr-7 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 text-xs font-semibold focus:outline-none focus:border-indigo-500 appearance-none cursor-pointer"
+            className="pl-2.5 pr-6 py-2 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 text-xs font-semibold focus:outline-none focus:border-indigo-500 appearance-none cursor-pointer max-w-[140px] sm:max-w-none truncate"
           >
-            {STATES_LIST.map((state) => (
+            {ALL_INDIAN_STATES.map((state) => (
               <option key={state} value={state}>
-                {state === 'All India' ? '📍 All India' : `📍 ${state}`}
+                {state === 'All States / Central' ? '📍 All States' : `📍 ${state}`}
               </option>
             ))}
           </select>
-          <MapPin className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500 pointer-events-none" />
+          <MapPin className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-500 pointer-events-none" />
         </div>
       </div>
 
-      {/* Category Pills (Minimal) */}
-      <div className="flex items-center space-x-1.5 overflow-x-auto pb-1 scrollbar-none">
+      {/* Category Pills */}
+      <div className="flex items-center space-x-1.5 overflow-x-auto pb-0.5 scrollbar-none text-xs">
         {CATEGORY_TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setSelectedCategory(tab.id)}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all ${
+            className={`px-3 py-1.5 rounded-lg font-bold whitespace-nowrap transition-colors ${
               selectedCategory === tab.id
-                ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30'
-                : 'bg-slate-900/90 text-slate-400 hover:text-white border border-slate-800'
+                ? 'bg-indigo-600 text-white'
+                : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
             }`}
           >
-            <span>{tab.icon}</span>
-            <span>{tab.label}</span>
+            {tab.label}
           </button>
         ))}
       </div>
 
-      {/* Archetype Quick Filter Chips */}
-      <div className="flex items-center space-x-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px]">
-        {ARCHETYPE_CHIPS.map(({ tag, label }) => {
-          const isActive = selectedTag === tag;
+      {/* Founder Type Filters */}
+      <div className="flex items-center space-x-1.5 overflow-x-auto pb-0.5 scrollbar-none text-[11px]">
+        {FOUNDER_FILTERS.map((f) => {
+          const isActive = selectedFounderType === f.id;
           return (
             <button
-              key={tag}
-              onClick={() => setSelectedTag(isActive ? null : tag)}
+              key={f.id}
+              onClick={() => setSelectedFounderType(f.id)}
               className={`px-2.5 py-1 rounded-md whitespace-nowrap font-medium transition-colors ${
                 isActive
                   ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold'
                   : 'bg-slate-900/60 text-slate-400 hover:text-slate-300 border border-slate-800/80'
               }`}
             >
-              {label}
+              {f.label}
             </button>
           );
         })}
-
-        {selectedTag && (
-          <button
-            onClick={() => setSelectedTag(null)}
-            className="text-xs text-rose-400 font-semibold hover:underline shrink-0 px-1"
-          >
-            Clear
-          </button>
-        )}
       </div>
 
-      {/* Result Counter */}
+      {/* Results Count & Active State Indicator */}
       <div className="flex items-center justify-between text-[11px] text-slate-400 pt-0.5">
-        <span>{totalResults} programs</span>
-        {selectedState !== 'All India' && (
-          <span className="text-indigo-400 font-medium">{selectedState} focus</span>
-        )}
+        <span>{totalResults} programs available</span>
+        <div className="flex items-center space-x-2">
+          {selectedState !== 'All States / Central' && (
+            <button 
+              onClick={() => setSelectedState('All States / Central')}
+              className="text-indigo-400 hover:underline"
+            >
+              {selectedState} ✕
+            </button>
+          )}
+          {selectedFounderType !== 'all' && (
+            <button 
+              onClick={() => setSelectedFounderType('all')}
+              className="text-emerald-400 hover:underline"
+            >
+              {selectedFounderType} ✕
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
