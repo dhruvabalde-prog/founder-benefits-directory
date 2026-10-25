@@ -1,51 +1,37 @@
-# FounderPerks: The Founder Schemes, Banking & Perks SuperApp
+# FounderPerks: High-Signal Multipage Founder Playbook
 
 [![Vercel Deployment](https://img.shields.io/badge/Vercel-Live_App-black?logo=vercel)](https://founder-benefits-directory.vercel.app)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/dhruvabalde-prog/founder-benefits-directory)
 
-A progressive web app (PWA) and native app experience for Indian and global startup founders to discover, calculate, and apply for non-dilutive government schemes, zero-balance founder banking suites, and $350k+ in free cloud/AI infrastructure credits.
+A lightning-fast, high-density, multipage playbook for Indian & Global startup founders. Replaces cluttered single-page feeds with a clean catalog index and dedicated master pages for every individual scheme, grant, banking perk, and cross-state arbitrage hack.
 
 🌐 **Live Production App**: [https://founder-benefits-directory.vercel.app](https://founder-benefits-directory.vercel.app)  
 📦 **GitHub Repository**: [https://github.com/dhruvabalde-prog/founder-benefits-directory](https://github.com/dhruvabalde-prog/founder-benefits-directory)
 
 ---
 
-## 📱 App Experience Features
+## ⚡ Multipage Architecture
 
-1. **Native App Shell & Bottom Dock Navigation**:
-   - Floating glassmorphism tab bar with 5 primary views:
-     - 🧭 **Explore**: Curated directory with live search, state filtering, and taxonomy tags.
-     - ✨ **Free Stack Calculator**: Interactive engine matching your stage, registrations, and sector to eligible grants and free credits.
-     - 📊 **Matrix**: Comparative breakdown across 5 core founder archetypes.
-     - ⚠️ **Traps & Gotchas**: 5 critical regulatory field manuals (80-IAC, Angel tax, e-FIRS / Purpose codes, MSME Samadhaan).
-     - 🔖 **My Perks**: Saved schemes with local offline persistence.
+1. **The Catalog Index (`/`)**:
+   - Ultra-fast, high-density row index with instant keypress filtering across all Indian states and categories.
+   - Clean badges, cash value amounts, and 1-click links to dedicated blueprints.
 
-2. **Phone App Simulator vs Desktop Full-Screen Toggle**:
-   - Switch in real-time between **Full Screen Desktop View** and **📱 Phone App Simulator** (complete with iPhone chassis, dynamic island, status indicators, and mobile viewport).
+2. **Dedicated Master Pages (`/benefit/:slug`)**:
+   - Every individual program has its own shareable, dedicated URL (e.g. `/benefit/istart-rajasthan-sustenance-and-seed`, `/benefit/startup-india-seed-fund-scheme-sisfs`, `/benefit/microsoft-for-startups-founders-hub`).
+   - Complete modules:
+     - ⚡ **Executive Brief & Timeline** (Approval turnaround, exact cash, disbursing body)
+     - 🎯 **Eligibility Matrix** (Checkbox checklist)
+     - 📄 **Document Preparation Pack** (Exact PDFs required)
+     - 🗺️ **Step-by-Step Application Roadmap** (Numbered workflows)
+     - ⚠️ **The Insider Gotchas & Traps** (Why 90% get rejected and how to pass)
+     - 💡 **Strategic Stacking Recommendations**
+     - 🔗 **Verified Official Portal Links** with direct external launch
 
-3. **Installable Progressive Web App (PWA)**:
-   - Configured with web app manifest (`public/manifest.json`), icons, and service worker (`public/sw.js`).
-   - One-click **"Install App"** prompt for Windows/macOS desktop and Android.
-   - iOS Safari **"Add to Home Screen"** guided sheet.
-   - Works offline with cached app assets and fast loading.
+3. **Cross-State Arbitrage & Legal Hacks (`/hacks`)**:
+   - Detailed tactical playbooks: Gurugram living + Rajasthan sustenance, Bihar 10-year 0% interest seed loan, SISFS Tier-2 incubator arbitrage, DPIIT 80% + State MSME patent double-dip, and GST Letter of Undertaking (LUT) export tax shields.
 
-4. **⚡ Supabase Integration Ready**:
-   - Pre-wired with `@supabase/supabase-js` client in `src/lib/supabase.ts`.
-   - Ready for sync bookmarks, community perk submissions, and upvoting.
-   - Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in Vercel Project Environment Variables.
+4. **Runway Stack Calculator (`/calculator`)**:
+   - 3-click personalized stack generator matching your state, stage, and sector.
 
----
-
-## 🛠️ Local Development
-
-```powershell
-# 1. Clone repository
-git clone https://github.com/dhruvabalde-prog/founder-benefits-directory.git
-cd founder-benefits-directory
-
-# 2. Install dependencies
-npm install
-
-# 3. Start local development server
-npm run dev
-```
+5. **Saved Bookmarks (`/saved`)**:
+   - Offline, private local storage bookmarks checklist.
