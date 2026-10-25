@@ -1,6 +1,12 @@
 # FounderPerks: The Founder Schemes, Banking & Perks SuperApp
 
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live_App-black?logo=vercel)](https://founder-benefits-directory.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/dhruvabalde-prog/founder-benefits-directory)
+
 A progressive web app (PWA) and native app experience for Indian and global startup founders to discover, calculate, and apply for non-dilutive government schemes, zero-balance founder banking suites, and $350k+ in free cloud/AI infrastructure credits.
+
+🌐 **Live Production App**: [https://founder-benefits-directory.vercel.app](https://founder-benefits-directory.vercel.app)  
+📦 **GitHub Repository**: [https://github.com/dhruvabalde-prog/founder-benefits-directory](https://github.com/dhruvabalde-prog/founder-benefits-directory)
 
 ---
 
@@ -23,18 +29,23 @@ A progressive web app (PWA) and native app experience for Indian and global star
    - iOS Safari **"Add to Home Screen"** guided sheet.
    - Works offline with cached app assets and fast loading.
 
+4. **⚡ Supabase Integration Ready**:
+   - Pre-wired with `@supabase/supabase-js` client in `src/lib/supabase.ts`.
+   - Ready for sync bookmarks, community perk submissions, and upvoting.
+   - Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in Vercel Project Environment Variables.
+
 ---
 
-## 🛠️ How to Run
+## 🛠️ Local Development
 
 ```powershell
-# 1. Navigate to the app folder
-cd C:\Users\Lenovo\.gemini\antigravity\scratch\founder-benefits-directory
+# 1. Clone repository
+git clone https://github.com/dhruvabalde-prog/founder-benefits-directory.git
+cd founder-benefits-directory
 
-# 2. Start the local server
+# 2. Install dependencies
+npm install
+
+# 3. Start local development server
 npm run dev
-
-# 3. Open in your browser (typically http://localhost:5173)
 ```
-
-Click **"📱 Phone App Simulator"** in the top bar to experience the mobile app chassis, or click **"Install App"** to install it directly onto your desktop or mobile home screen!
