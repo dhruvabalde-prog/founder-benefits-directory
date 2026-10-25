@@ -120,6 +120,51 @@ const STATE_PROFILES: Record<string, StateProfile> = {
     patentSubsidy: 'Up to ₹3L domestic / ₹10L international',
     keyIncubator: 'O-Hub, KIIT-TBI Bhubaneswar, IIT BBS',
     taxOrSgstRebate: 'Free co-working seats at O-Hub'
+  },
+  'Madhya Pradesh': {
+    name: 'Madhya Pradesh',
+    sustenance: '₹10,000/mo for 12 months',
+    seedGrant: 'Up to ₹30 Lakhs seed capital via incubators',
+    softLoan: '15% matching co-investment grant (up to ₹15L)',
+    patentSubsidy: 'Full patent fee reimbursement',
+    keyIncubator: 'SVIC Indore, IIM Indore, MANIT Bhopal',
+    taxOrSgstRebate: 'Lease rental subsidy up to ₹5,000/mo'
+  },
+  'Goa': {
+    name: 'Goa',
+    sustenance: '₹20,000/mo for 12 months',
+    seedGrant: 'Up to ₹10 Lakhs prototype seed grant',
+    softLoan: 'Interest subsidy on working capital loans',
+    patentSubsidy: 'Up to ₹2 Lakhs per patent',
+    keyIncubator: 'FiiRE Goa, Don Bosco College, Panaji',
+    taxOrSgstRebate: '50% salary reimbursement (up to ₹25k/mo per hire)'
+  },
+  'Punjab': {
+    name: 'Punjab',
+    sustenance: '₹15,000/mo for 12 months',
+    seedGrant: 'Up to ₹3 Lakhs seed capital grant',
+    softLoan: 'Subsidized loan assistance via State MSME',
+    patentSubsidy: 'Up to ₹2 Lakhs per patent',
+    keyIncubator: 'AIC-ISB Mohali, IIT Ropar',
+    taxOrSgstRebate: '100% electricity duty exemption for 7 years'
+  },
+  'Assam': {
+    name: 'Assam',
+    sustenance: '₹20,000/mo for 12 months',
+    seedGrant: 'Up to ₹5L idea grant + ₹50L scaleup support',
+    softLoan: 'North East Venture Fund (NEVF) access',
+    patentSubsidy: 'Full patent filing cost support',
+    keyIncubator: 'Assam Startup Nest, IIT Guwahati TIC',
+    taxOrSgstRebate: 'Special North East industrial development incentives'
+  },
+  'Andhra Pradesh': {
+    name: 'Andhra Pradesh',
+    sustenance: 'Incubation living stipends in select hubs',
+    seedGrant: 'Up to ₹10 Lakhs seed funding grant',
+    softLoan: 'State venture capital matching fund',
+    patentSubsidy: 'Up to ₹2 Lakhs per patent',
+    keyIncubator: 'APIS Millennium Tower Vizag, AMTZ MedTech Hub',
+    taxOrSgstRebate: 'Subsidized plug-and-play co-working desks'
   }
 };
 

@@ -25,14 +25,16 @@ export const App: React.FC = () => {
     categories: [],
     states: [],
     stages: [],
-    sectors: []
+    sectors: [],
+    entities: []
   });
 
   const activeFilterCount =
     filters.categories.length +
     filters.states.length +
     filters.stages.length +
-    filters.sectors.length;
+    filters.sectors.length +
+    filters.entities.length;
 
   useEffect(() => {
     try {

@@ -49,7 +49,14 @@ export const HomePage: React.FC<HomePageProps> = ({
         return false;
       }
 
-      // 2. Myntra Dependent State Filter
+      // 2. Entity Type Filter
+      if (filters.entities && filters.entities.length > 0 && item.entityTypes) {
+        if (!item.entityTypes.some((e) => filters.entities.includes(e))) {
+          return false;
+        }
+      }
+
+      // 3. Myntra Dependent State Filter
       if (filters.states.length > 0) {
         const matchesAnyState = filters.states.some(
           (s) =>
@@ -61,7 +68,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         if (!matchesAnyState) return false;
       }
 
-      // 3. Search query
+      // 4. Search query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matchesTitle = item.title.toLowerCase().includes(q);
@@ -82,7 +89,8 @@ export const HomePage: React.FC<HomePageProps> = ({
     filters.categories.length +
     filters.states.length +
     filters.stages.length +
-    filters.sectors.length;
+    filters.sectors.length +
+    (filters.entities ? filters.entities.length : 0);
 
   const removeStateFilter = (state: string) => {
     setFilters((prev) => ({
@@ -95,6 +103,13 @@ export const HomePage: React.FC<HomePageProps> = ({
     setFilters((prev) => ({
       ...prev,
       categories: prev.categories.filter((c) => c !== cat)
+    }));
+  };
+
+  const removeEntityFilter = (ent: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      entities: prev.entities.filter((e) => e !== ent)
     }));
   };
 
@@ -163,6 +178,23 @@ export const HomePage: React.FC<HomePageProps> = ({
             </span>
           ))}
 
+          {filters.entities && filters.entities.map((e) => (
+            <span
+              key={e}
+              className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-md bg-[#eef4ff] border border-[#c7d9fc] text-[#1e40af] font-mono text-[11px]"
+            >
+              <span>{e.replace('_', ' ').toUpperCase()}</span>
+              <button
+                type="button"
+                onClick={() => removeEntityFilter(e)}
+                className="hover:text-black ml-0.5"
+                aria-label="Remove filter"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </span>
+          ))}
+
           {filters.states.map((s) => (
             <span
               key={s}
@@ -182,7 +214,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
           <button
             type="button"
-            onClick={() => setFilters({ categories: [], states: [], stages: [], sectors: [] })}
+            onClick={() => setFilters({ categories: [], states: [], stages: [], sectors: [], entities: [] })}
             className="text-[11px] font-mono text-stone-500 hover:text-stone-900 underline px-1"
           >
             Clear all
@@ -204,7 +236,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               type="button"
               onClick={() => {
                 setSearchQuery('');
-                setFilters({ categories: [], states: [], stages: [], sectors: [] });
+                setFilters({ categories: [], states: [], stages: [], sectors: [], entities: [] });
               }}
               className="p-2.5 rounded-lg bg-[#274e37] text-white inline-flex items-center justify-center"
               aria-label="Reset Filters"
@@ -357,7 +389,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         onClose={() => setIsFilterOpen(false)}
         filters={filters}
         onApplyFilters={(newFilters) => setFilters(newFilters)}
-        onResetFilters={() => setFilters({ categories: [], states: [], stages: [], sectors: [] })}
+        onResetFilters={() => setFilters({ categories: [], states: [], stages: [], sectors: [], entities: [] })}
       />
     </div>
   );

@@ -20,6 +20,7 @@ export interface MasterItem {
   domain: string;
   tags: string[];
   founderStage: ('idea' | 'bootstrapped' | 'pre_seed' | 'seed')[];
+  entityTypes?: ('sole_proprietorship' | 'partnership' | 'llp' | 'pvt_ltd' | 'delaware_c_corp')[];
 }
 
 export const MASTER_CATALOG: MasterItem[] = [
@@ -932,6 +933,658 @@ export const MASTER_CATALOG: MasterItem[] = [
     officialLink: 'https://gem.gov.in/',
     domain: 'gem.gov.in',
     tags: ['GeM', 'Government Tenders', 'Procurement', 'EMD Waiver', 'Public Sector'],
-    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed']
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'partnership']
+  },
+
+  // 21. IDFC FIRST BANK - FIRST WINGS (3 YEARS ZERO BALANCE)
+  {
+    id: 'idfc-first-wings-account',
+    slug: 'idfc-first-bank-first-wings-3year-zero-balance-account',
+    title: 'IDFC FIRST Wings: 3-Year Zero-Balance Startup Account',
+    category: 'banking',
+    categoryLabel: 'Founder Current Account',
+    provider: 'IDFC FIRST Bank',
+    stateOrRegion: 'All States / Central',
+    valueAmount: '3 Years (36 Mo) Zero MAB + Auto-Sweep Yield',
+    badge: '3-Year Zero Balance',
+    approvalTimeline: '2 to 4 business days via digital doorstep KYC',
+    executiveSummary: 'Full 3-year waiver (36 months) on Non-Maintenance Charges (NMC) with zero Minimum Average Balance commitments, plus automated BRAVO auto-sweep where idle runway cash automatically earns high liquid FD interest without locking withdrawal flexibility.',
+    whyFoundersCare: 'Standard business accounts penalize early startups if balances drop below ₹50,000. IDFC gives a full 36-month cushion while turning idle venture capital into high-yield liquidity, plus free access to physical startup lounges (e.g. Koramangala Bengaluru).',
+    eligibility: [
+      'Private Limited Company, LLP, Registered Partnership, or Sole Proprietorship',
+      'Entity incorporated for not more than 10 years',
+      'Available for bootstrapped and VC-funded startups alike'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation / Partnership Deed / Udyam Certificate',
+      'Company PAN Card & Board Resolution / Authorization Letter',
+      'Director / Partner KYC (Aadhaar & PAN)',
+      'Registered office utility bill or lease agreement'
+    ],
+    applicationSteps: [
+      '1. Apply via the IDFC FIRST Wings portal or partner incubators.',
+      '2. Dedicated startup relationship manager coordinates digital doorstep verification.',
+      '3. Instant account number and IFSC allocation within 48 hours.',
+      '4. Activate auto-sweep feature on Internet Banking to earn yield on idle capital.'
+    ],
+    gotchasAndNuances: [
+      'Account enjoys 36-month waiver; after 3 years, standard account balance tiers apply unless extended by portfolio terms.',
+      'Auto-sweep interest is taxable as business income.'
+    ],
+    stackingTips: [
+      'Use IDFC corporate expense credit cards to pay for AWS and Google Ads to automate expense tracking.',
+      'Stack with Stripe/Razorpay for immediate inward merchant settlement.'
+    ],
+    officialLink: 'https://www.idfcfirstbank.com/business-banking/startup-banking',
+    domain: 'idfcfirstbank.com',
+    tags: ['Banking', 'Zero Balance', '3 Years MAB', 'IDFC FIRST Wings', 'Auto-Sweep'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'partnership', 'sole_proprietorship']
+  },
+
+  // 22. INDUSIND BANK - INDUSSTARTUP (3-YEAR WAIVER)
+  {
+    id: 'indusind-startup-program',
+    slug: 'indusind-bank-indusstartup-3year-charge-waiver',
+    title: 'IndusInd IndusStartUp: 3-Year Charge Waiver & 250+ APIs',
+    category: 'banking',
+    categoryLabel: 'Founder Current Account',
+    provider: 'IndusInd Bank',
+    stateOrRegion: 'All States / Central',
+    valueAmount: '3 Years Non-Maintenance Waiver + 250+ Free APIs',
+    badge: '3-Year Zero Balance',
+    approvalTimeline: '3 to 5 business days',
+    executiveSummary: 'Full 3-year waiver on non-maintenance charges for early and growth startups, bundled with 250+ developer APIs for automated bulk payouts, pre-integrated payment gateway onboarding, and specialized corporate salary accounts.',
+    whyFoundersCare: 'Built for tech companies needing API banking (instant user withdrawals, automated vendor disbursements, escrow services) without paying hefty enterprise setup fees.',
+    eligibility: [
+      'DPIIT-recognized startup or incubated company',
+      'Pvt Ltd, LLP, or registered partnership up to 10 years vintage'
+    ],
+    documentsRequired: [
+      'Incorporation Certificate & DPIIT Certificate',
+      'Entity PAN Card & GST Registration',
+      'Director KYC and Board Resolution'
+    ],
+    applicationSteps: [
+      '1. Fill the IndusStartUp inquiry form online.',
+      '2. Pitch your tech use cases to the fintech relationship manager.',
+      '3. Complete biometric KYC and receive API sandbox keys.'
+    ],
+    gotchasAndNuances: [
+      'API access requires basic IP whitelisting and security verification.',
+      'Waives non-maintenance charges for 3 years from opening date.'
+    ],
+    stackingTips: [
+      'Use their automated escrow API for marketplace models to remain RBI compliant.',
+      'Stack with AWS Activate for seamless cloud infra payments.'
+    ],
+    officialLink: 'https://www.indusind.com/in/en/business/accounts/indus-startup.html',
+    domain: 'indusind.com',
+    tags: ['Banking', 'IndusInd', '3 Years Zero Balance', 'API Banking', 'Payouts'],
+    founderStage: ['bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'partnership']
+  },
+
+  // 23. YES BANK - YES HEADSTART-UP (3-YEAR NO BALANCE COMMITMENT)
+  {
+    id: 'yes-bank-headstartup',
+    slug: 'yes-bank-headstartup-3year-zero-balance-escrow',
+    title: 'YES HeadSTART-UP: 3-Year Zero Balance & Escrow Suite',
+    category: 'banking',
+    categoryLabel: 'Founder Current Account',
+    provider: 'YES Bank',
+    stateOrRegion: 'All States / Central',
+    valueAmount: '3-Year Zero Balance Commitment + Discounted Remittance',
+    badge: '3-Year Zero Balance',
+    approvalTimeline: '2 to 4 business days',
+    executiveSummary: 'Dedicated startup current account with zero balance commitment for the first 3 years, custom escrow management for fintech/marketplaces, and discounted foreign currency margins for inward wires.',
+    whyFoundersCare: 'Marketplace founders get legal digital escrow accounts without spending lakhs on customized corporate banking legalities.',
+    eligibility: [
+      'Startups incorporated under 10 years',
+      'Pvt Ltd, LLP, or Registered Partnership'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation & MoA/AoA',
+      'DPIIT Certificate or Incubator reference',
+      'Directors KYC and Address Proof'
+    ],
+    applicationSteps: [
+      '1. Apply through YES Bank Startup Desk.',
+      '2. Relationship manager reviews business model and assigns virtual account rails.',
+      '3. Inward remittance setup configured with preferential exchange rates.'
+    ],
+    gotchasAndNuances: [
+      'Zero balance commitment holds for 36 months.',
+      'Custom escrow requires standard bipartite legal agreement.'
+    ],
+    stackingTips: [
+      'Lock Purpose Code P0802 for inward SaaS subscriptions to auto-generate e-FIRS.',
+      'Combine with GST LUT for 0% tax exports.'
+    ],
+    officialLink: 'https://www.yesbank.in/business-banking/yes-headstartup',
+    domain: 'yesbank.in',
+    tags: ['Banking', 'YES Bank', '3 Years Zero Balance', 'Escrow', 'Forex'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'partnership']
+  },
+
+  // 24. MERCURY US CURRENT ACCOUNT & 5M FDIC
+  {
+    id: 'mercury-bank-startup',
+    slug: 'mercury-bank-us-fdic-startup-account',
+    title: 'Mercury: $5M FDIC US Inward Account & 4.5%+ Treasury',
+    category: 'banking',
+    categoryLabel: 'Global Startup Banking',
+    provider: 'Mercury (Choice Financial Group / Evolve Bank & Trust)',
+    stateOrRegion: 'Global / US Entities',
+    valueAmount: '$5 Million FDIC Insurance + 4.5%+ Treasury Yield',
+    badge: 'Global US Banking',
+    approvalTimeline: '24 to 72 hours 100% online',
+    executiveSummary: 'Full-featured US checking and savings accounts for Delaware C-Corps and foreign entities with $5M FDIC insurance via sweep networks, zero monthly fees, zero minimums, and automated treasury yields on idle USD.',
+    whyFoundersCare: 'Essential for founders accepting US investor checks (YC, Techstars, US angels), charging international customers on Stripe US, or paying US SaaS vendors without high cross-border wire penalties.',
+    eligibility: [
+      'Delaware C-Corp, US LLC, or international business with US EIN',
+      'Valid passport for international founders (Indian citizens fully eligible)'
+    ],
+    documentsRequired: [
+      'US Certificate of Incorporation (e.g. from Stripe Atlas / Clerky)',
+      'IRS Form CP575 / 147C (EIN Confirmation Letter)',
+      'Founder International Passport'
+    ],
+    applicationSteps: [
+      '1. Open account online at mercury.com with your US company documents.',
+      '2. Link US Stripe account and transfer investor capital.',
+      '3. Deploy funds into Mercury Treasury for automated safe yields.'
+    ],
+    gotchasAndNuances: [
+      'Requires registered US corporate entity (costs ~$500 on Stripe Atlas).',
+      'Must file annual Delaware franchise tax and US federal Form 1120/5472.'
+    ],
+    stackingTips: [
+      'Pair with Indian Wholly Owned Subsidiary (WOS) via Cost-Plus agreement.',
+      'Unlock $150k in partner SaaS perks across AWS, Brex, and Carta.'
+    ],
+    officialLink: 'https://mercury.com/',
+    domain: 'mercury.com',
+    tags: ['Global', 'Mercury', 'Delaware', 'FDIC', 'US Banking', 'Treasury'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['delaware_c_corp']
+  },
+
+  // 25. ANTHROPIC CLAUDE FOR STARTUPS
+  {
+    id: 'anthropic-claude-startups',
+    slug: 'anthropic-claude-for-startups-credits',
+    title: 'Anthropic Claude for Startups ($25k–$100k API Credits)',
+    category: 'cloud',
+    categoryLabel: 'AI & Compute Grants',
+    provider: 'Anthropic PBC',
+    stateOrRegion: 'Global / All India',
+    valueAmount: '$25,000 to $100,000 in Claude API Credits',
+    badge: 'AI Model Credits',
+    approvalTimeline: '1 to 3 weeks via partner accelerators or direct application',
+    executiveSummary: 'Substantial API credits to build on Claude 3.5 Sonnet, Haiku, and Opus models, with extended context windows (200k tokens) and computer-use agent capabilities.',
+    whyFoundersCare: 'Building AI agents or LLM apps consumes thousands of dollars monthly in inference costs. Anthropic credits give you 12–18 months of free AI infrastructure.',
+    eligibility: [
+      'Early-stage AI-first startup with working prototype',
+      'Associated with recognized venture funds, incubators, or technical accelerators'
+    ],
+    documentsRequired: [
+      'Company domain and working prototype demo link',
+      'Architectural description of how Claude models are utilized'
+    ],
+    applicationSteps: [
+      '1. Apply via the Anthropic startup program or partner portal.',
+      '2. Submit API architecture and token consumption projections.',
+      '3. Credits applied directly to your Anthropic Console organization.'
+    ],
+    gotchasAndNuances: [
+      'Credits typically valid for 12 months from issuance.',
+      'Applies to direct Anthropic API usage (not AWS Bedrock/GCP Vertex unless specified).'
+    ],
+    stackingTips: [
+      'Stack with Microsoft Founders Hub OpenAI credits to compare multi-model evaluations for free.',
+      'Use Claude 3.5 Sonnet for complex coding and Haiku for high-speed background tasks.'
+    ],
+    officialLink: 'https://www.anthropic.com/',
+    domain: 'anthropic.com',
+    tags: ['AI Credits', 'Claude 3.5', 'Anthropic', 'LLM', 'Zero Burn'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'delaware_c_corp']
+  },
+
+  // 26. NOTION FOR STARTUPS (UNLIMITED AI)
+  {
+    id: 'notion-for-startups',
+    slug: 'notion-for-startups-free-plus-plan-and-ai',
+    title: 'Notion for Startups: Up to 6 Months Free Plus + Unlimited AI',
+    category: 'cloud',
+    categoryLabel: 'SaaS Tooling',
+    provider: 'Notion Labs Inc.',
+    stateOrRegion: 'Global / All India',
+    valueAmount: 'Up to 6 Months Free Plus Plan + Unlimited AI (~$1,200)',
+    badge: 'Productivity Suite',
+    approvalTimeline: 'Instant to 48 hours online',
+    executiveSummary: 'Full access to Notion Plus plan with unlimited file uploads, team collaboration workspaces, and unlimited Notion AI for team documentation, PRDs, sprint planning, and investor updates.',
+    whyFoundersCare: 'Centralizes company documentation, engineering roadmaps, and customer CRMs in one tool for zero cost during early team building.',
+    eligibility: [
+      'New Notion team workspace with company email domain',
+      'Bootstrapped or affiliated with any startup community'
+    ],
+    documentsRequired: [
+      'Company website URL and work email'
+    ],
+    applicationSteps: [
+      '1. Apply at notion.so/startups with promo code or partner name.',
+      '2. Credit is credited immediately to workspace billing.'
+    ],
+    gotchasAndNuances: [
+      'Cannot be applied to workspaces with prior enterprise billing.',
+      'Valid for 3 to 6 months depending on partner status.'
+    ],
+    stackingTips: [
+      'Use free Notion templates for fundraising deal rooms and cap table tracking.',
+      'Integrate with GitHub and Slack for automated engineering standups.'
+    ],
+    officialLink: 'https://www.notion.so/startups',
+    domain: 'notion.so',
+    tags: ['Notion', 'Productivity', 'Notion AI', 'Free SaaS', 'Documentation'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'partnership', 'sole_proprietorship', 'delaware_c_corp']
+  },
+
+  // 27. HUBSPOT FOR STARTUPS (75% TO 90% OFF)
+  {
+    id: 'hubspot-for-startups',
+    slug: 'hubspot-for-startups-crm-marketing-discount',
+    title: 'HubSpot for Startups: 75% to 90% First-Year Discount',
+    category: 'cloud',
+    categoryLabel: 'Go-to-Market Suite',
+    provider: 'HubSpot Inc.',
+    stateOrRegion: 'Global / All India',
+    valueAmount: 'Up to 90% Off Year 1 (Saves ₹4L–₹8L)',
+    badge: 'GTM & CRM Suite',
+    approvalTimeline: '2 to 3 business days',
+    executiveSummary: 'Massive 75% to 90% discount on HubSpot Enterprise and Professional software (Marketing Hub, Sales Hub, Service Hub, and CMS) for early-stage companies.',
+    whyFoundersCare: 'Enterprise CRM and email sequencing software is usually unaffordable for seed startups. This allows high-velocity outbound sales and inbound lead funnels from Day 1.',
+    eligibility: [
+      'Bootstrapped or raised under $2M in seed capital',
+      'Affiliated with approved incubator, accelerator, or VC'
+    ],
+    documentsRequired: [
+      'Pitch deck or partner affiliation verification'
+    ],
+    applicationSteps: [
+      '1. Apply via hubspot.com/startups.',
+      '2. Select your funding tier (Under $2M = up to 90% off).',
+      '3. Onboarding team applies discount directly to monthly or annual billing.'
+    ],
+    gotchasAndNuances: [
+      'Discount scales down to 50% in Year 2 and 25% in Year 3.',
+      'Must purchase annual plan to lock lowest pricing.'
+    ],
+    stackingTips: [
+      'Integrate with Segment and SendGrid to automate product onboarding emails.',
+      'Use HubSpot free meeting scheduler on your pitch deck landing page.'
+    ],
+    officialLink: 'https://www.hubspot.com/startups',
+    domain: 'hubspot.com',
+    tags: ['HubSpot', 'CRM', 'Sales', 'Marketing', 'Discounts'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'delaware_c_corp']
+  },
+
+  // 28. TWILIO & SEGMENT STARTUP PACK ($25k CREDITS)
+  {
+    id: 'segment-twilio-startups',
+    slug: 'segment-twilio-startups-25k-credits',
+    title: 'Twilio & Segment: $25,000 CDP Credits + Free SendGrid',
+    category: 'cloud',
+    categoryLabel: 'Analytics & Email',
+    provider: 'Twilio Segment',
+    stateOrRegion: 'Global / All India',
+    valueAmount: '$25,000 Segment Credits + 200k Free Emails/Mo',
+    badge: 'Customer Data Platform',
+    approvalTimeline: '3 to 5 business days',
+    executiveSummary: 'Access to Segment Team plan ($25,000 value) for 12 to 24 months, allowing clean user tracking across mobile and web, plus SendGrid Pro credits for transactional OTP and marketing emails.',
+    whyFoundersCare: 'Solves messy analytics tracking early. Instead of writing custom integrations for 10 tools, write one Segment tracking snippet and pipe data anywhere for free.',
+    eligibility: [
+      'Incorporated for less than 3 years',
+      'Raised under $5 Million in equity funding'
+    ],
+    documentsRequired: [
+      'Company URL and basic founder bio'
+    ],
+    applicationSteps: [
+      '1. Submit application at segment.com/startups.',
+      '2. Enter partner code or accelerator name.',
+      '3. Set up tracking sources and unlock $25k in credit.'
+    ],
+    gotchasAndNuances: [
+      'Credits expire after 1 year (can be renewed for select seed companies).',
+      'Requires domain DNS verification for SendGrid email authentication (DKIM/SPF).'
+    ],
+    stackingTips: [
+      'Pipe Segment event streams into BigQuery (covered under your Google Cloud $350k grant).',
+      'Send custom event-triggered emails via SendGrid for user re-activation.'
+    ],
+    officialLink: 'https://segment.com/startups/',
+    domain: 'segment.com',
+    tags: ['Segment', 'Twilio', 'SendGrid', 'Analytics', 'Email Infrastructure'],
+    founderStage: ['bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'delaware_c_corp']
+  },
+
+  // 29. MIXPANEL FOR STARTUPS ($50,000 CREDITS)
+  {
+    id: 'mixpanel-for-startups',
+    slug: 'mixpanel-for-startups-50k-credits',
+    title: 'Mixpanel for Startups: $50,000 Product Analytics Credits',
+    category: 'cloud',
+    categoryLabel: 'Product Analytics',
+    provider: 'Mixpanel Inc.',
+    stateOrRegion: 'Global / All India',
+    valueAmount: '$50,000 in Growth Plan Credits for 1 Year',
+    badge: 'Product Analytics',
+    approvalTimeline: '24 to 48 hours online',
+    executiveSummary: 'Full access to Mixpanel Growth Plan with unlimited saved reports, cohort analysis, conversion funnel drop-offs, and behavioral retention tracking for up to 100 Million monthly events.',
+    whyFoundersCare: 'Product-market fit requires measuring exact user drop-off points. Mixpanel gives enterprise-grade behavioral cohorts for free without bogging down your engineering team.',
+    eligibility: [
+      'Incorporated less than 5 years ago',
+      'Raised under $8 Million in funding'
+    ],
+    documentsRequired: [
+      'Company email domain and LinkedIn'
+    ],
+    applicationSteps: [
+      '1. Register a free Mixpanel account.',
+      '2. Apply via mixpanel.com/startups.',
+      '3. Enter company details to receive $50,000 in credits immediately.'
+    ],
+    gotchasAndNuances: [
+      'Valid for 12 months; plan your event tracking carefully to not exceed event quotas.'
+    ],
+    stackingTips: [
+      'Pipe data from Segment to Mixpanel with zero code.',
+      'Use Mixpanel funnel charts directly in your Series A investor deck.'
+    ],
+    officialLink: 'https://mixpanel.com/startups/',
+    domain: 'mixpanel.com',
+    tags: ['Mixpanel', 'Analytics', 'Funnels', 'Cohorts', 'Free SaaS'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'delaware_c_corp']
+  },
+
+  // 30. PMEGP MANUFACTURING & D2C CAPITAL SUBSIDY (UP TO 35%)
+  {
+    id: 'pmegp-capital-subsidy',
+    slug: 'pmegp-manufacturing-d2c-capital-subsidy',
+    title: 'PMEGP: 15% to 35% Non-Repayable Capital Subsidy on ₹50L Loan',
+    category: 'grant',
+    categoryLabel: 'Government Capital Subsidy',
+    provider: 'KVIC, Ministry of MSME, Govt of India',
+    stateOrRegion: 'All States / Central',
+    valueAmount: '15% to 35% Non-Repayable Subsidy on ₹50 Lakhs Loan',
+    badge: '35% Govt Subsidy',
+    approvalTimeline: '6 to 12 weeks via District Task Force & Nodal Bank',
+    executiveSummary: 'Credit-linked government subsidy scheme providing bank term loans up to ₹50 Lakhs for manufacturing / processing units (and ₹20 Lakhs for service sector) with a direct, non-repayable government capital subsidy of 15% to 35% deposited into a lock-in subsidy reserve.',
+    whyFoundersCare: 'For hardware, consumer goods, foodtech, and D2C startups needing machinery, the government pays up to ₹17.5 Lakhs of your project cost as a free capital grant, meaning you only repay 65% of the debt.',
+    eligibility: [
+      'Individual entrepreneurs, Sole Proprietors, Partnerships, LLPs, or Pvt Ltd companies',
+      'For projects over ₹10L: Minimum 8th class educational pass',
+      'General category urban: 15% subsidy; Special category (Women, SC/ST, Ex-servicemen) or rural: Up to 35% subsidy'
+    ],
+    documentsRequired: [
+      'Detailed Project Report (DPR) with machine quotations and 3-year cash flows',
+      'Promoter Aadhaar, PAN, and Caste/Category certificate (if claiming 35%)',
+      'Rural area certificate from Gram Panchayat (if claiming rural 35%)',
+      'Land/lease proof for manufacturing workshop or cloud kitchen'
+    ],
+    applicationSteps: [
+      '1. Submit online application on KVIC portal (kviconline.gov.in/pmegpeportal).',
+      '2. District Task Force Committee (DLTFC) evaluates project DPR.',
+      '3. Approved file forwarded to selected public sector or commercial bank.',
+      '4. Bank sanctions loan and claims subsidy from KVIC.',
+      '5. Complete 10-day Entrepreneurship Development Programme (EDP) training online.'
+    ],
+    gotchasAndNuances: [
+      'Government subsidy is kept in a Term Deposit Receipt (TDR) for 3 years interest-free and adjusted against the loan principal on physical inspection.',
+      'Cannot be availed if already received central government capital subsidies on the same machinery.'
+    ],
+    stackingTips: [
+      'Combine with Mudra Tarun loan for additional working capital.',
+      'Use state electric power subsidy in your DPR to show higher net operating margins.'
+    ],
+    officialLink: 'https://www.kviconline.gov.in/pmegpeportal/',
+    domain: 'kviconline.gov.in',
+    tags: ['PMEGP', 'Subsidy', 'Manufacturing', 'D2C', 'Hardware', 'KVIC'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed'],
+    entityTypes: ['sole_proprietorship', 'partnership', 'llp', 'pvt_ltd']
+  },
+
+  // 31. MADHYA PRADESH STARTUP POLICY (MP-STARTUP)
+  {
+    id: 'mp-startup-policy',
+    slug: 'madhya-pradesh-startup-sustenance-and-seed',
+    title: 'Madhya Pradesh Startup Policy: ₹10k/Mo Sustenance & ₹30L Seed',
+    category: 'stipend',
+    categoryLabel: 'Monthly Living Cash & Seed Grant',
+    provider: 'Department of MSME, Govt of Madhya Pradesh',
+    stateOrRegion: 'Madhya Pradesh',
+    valueAmount: '₹10k/Mo (1 Yr) + Up to ₹30L Seed Grant + 15% Co-Investment',
+    badge: 'Monthly Cash & Grants',
+    approvalTimeline: '4 to 8 weeks via recognized MP incubators',
+    executiveSummary: 'Guaranteed monthly sustenance allowance of ₹10,000/month for 1 year, seed funding up to ₹30 Lakhs for raw materials, manpower, and testing via partner incubators, plus a 15% matching co-investment grant (up to ₹15 Lakhs) for startups raising private angel rounds.',
+    whyFoundersCare: 'Indore and Bhopal have developed strong product and SaaS ecosystems with very low living costs. MP offers direct living support, lease rental subsidies, and equity matching.',
+    eligibility: [
+      'Registered entity with registered office in Madhya Pradesh',
+      'DPIIT Recognition Certificate and MP Startup Portal registration',
+      'Incubated at a recognized incubator within Madhya Pradesh'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation & MP GST registration',
+      'DPIIT Certificate and MP Startup registration ID',
+      'Promoter Aadhaar and MP registered office proof',
+      'Detailed proposal with milestone budget'
+    ],
+    applicationSteps: [
+      '1. Register on the MP Startup Portal (mpmsme.gov.in).',
+      '2. Link with an empanelled MP incubator (e.g. SVIC, IIM Indore, MANIT Bhopal).',
+      '3. Submit application for Sustenance Allowance and Seed Grant.',
+      '4. Attend the State Evaluation Committee presentation.',
+      '5. Disbursals made in stages directly to the startup bank account.'
+    ],
+    gotchasAndNuances: [
+      'Must maintain corporate registration in Madhya Pradesh for at least 3 years.',
+      'Special 20% bonus on all financial subsidies for women-led startups.'
+    ],
+    stackingTips: [
+      'Stack with Central SISFS seed grants via IIM Indore or AIC-AARTECH.',
+      'Claim 100% patent filing fee reimbursement under the MP policy.'
+    ],
+    officialLink: 'https://mpmsme.gov.in/',
+    domain: 'mpmsme.gov.in',
+    tags: ['Madhya Pradesh', 'Indore', 'Bhopal', 'Sustenance', 'Seed Grant'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'partnership']
+  },
+
+  // 32. GOA STARTUP POLICY & SALARY REIMBURSEMENTS
+  {
+    id: 'goa-startup-policy',
+    slug: 'goa-startup-policy-salary-and-sustenance',
+    title: 'Goa Startup Policy: ₹20k/Mo Sustenance + Employee Salary Rebate',
+    category: 'stipend',
+    categoryLabel: 'Founder Sustenance & Hiring Rebate',
+    provider: 'Goa Startup Promotion Cell (SPC), DITEC, Govt of Goa',
+    stateOrRegion: 'Goa',
+    valueAmount: '₹20k/Mo Sustenance + Up to ₹25k/Mo per Hire Salary Rebate',
+    badge: 'Salary & Living Rebates',
+    approvalTimeline: '4 to 8 weeks via SPC Goa',
+    executiveSummary: 'Living sustenance of ₹20,000/month for founders for 1 year, prototype grant up to ₹10 Lakhs, and a massive salary reimbursement scheme where the Goa government reimburses 50% of the salary of local Goan hires (up to ₹25,000/month per engineer) for 2 years.',
+    whyFoundersCare: 'Allows remote and tech teams to set up engineering beachheads in Goa. The state literally pays half your engineering payroll, reducing company burn drastically.',
+    eligibility: [
+      'Registered entity with registered office in Goa',
+      'Certified as a Goa Startup by the Startup Promotion Cell (SPC)',
+      'At least 50% of permanent workforce or key promoters residing in Goa'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation & Goa address proof',
+      'DPIIT Recognition Certificate and SPC certification',
+      'Employee muster roll and salary bank statements (for salary reimbursement)'
+    ],
+    applicationSteps: [
+      '1. Apply on the Goa Startup Portal (startup.goa.gov.in).',
+      '2. Receive official SPC Goa accreditation certificate.',
+      '3. Submit quarterly claims for Sustenance Allowance and Salary Reimbursement.',
+      '4. Inspection and direct RTGS reimbursement.'
+    ],
+    gotchasAndNuances: [
+      'Salary reimbursement claims must be supported by bank transfers and PF/ESIC or standard employment contracts.',
+      'Entities cannot shift out of Goa for 3 years post-disbursement.'
+    ],
+    stackingTips: [
+      'Enjoy high-quality lifestyle in Panaji/North Goa with zero-stress office rentals.',
+      'Stack with Microsoft Founders Hub and Google Cloud for 100% remote software stack.'
+    ],
+    officialLink: 'https://startup.goa.gov.in/',
+    domain: 'startup.goa.gov.in',
+    tags: ['Goa', 'Salary Subsidy', 'Sustenance', 'Hiring Rebate', 'Zero Burn'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed'],
+    entityTypes: ['pvt_ltd', 'llp']
+  },
+
+  // 33. PUNJAB STARTUP POLICY
+  {
+    id: 'punjab-startup-hub',
+    slug: 'punjab-startup-hub-sustenance-and-seed',
+    title: 'Punjab Startup Hub: ₹15k/Mo Sustenance & Electricity Exemption',
+    category: 'stipend',
+    categoryLabel: 'Living Cash & Power Rebate',
+    provider: 'Startup Punjab, Department of Industries & Commerce, Govt of Punjab',
+    stateOrRegion: 'Punjab',
+    valueAmount: '₹15,000/Mo Sustenance (1 Yr) + ₹3L Seed + 100% Power Duty Exemption',
+    badge: 'Monthly Cash & Power Rebate',
+    approvalTimeline: '4 to 6 weeks via Startup Punjab Nodal Cell',
+    executiveSummary: 'Direct monthly living stipend of ₹15,000/month for 1 year, seed funding up to ₹3 Lakhs, 100% exemption on electricity duty for 7 years, and lease rental subsidies up to ₹10,000/month in Mohali and Ludhiana.',
+    whyFoundersCare: 'Mohali is rapidly growing as the tech sister city to Chandigarh. Low operational costs and 100% electric power subsidies give hardware and IT companies substantial savings.',
+    eligibility: [
+      'Entity registered in Punjab with active state GST or Udyam',
+      'DPIIT-recognized and certified by Startup Punjab',
+      'Incubated at a state-approved incubator (e.g. AIC-ISB Mohali, IIT Ropar)'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation / Partnership Deed',
+      'DPIIT Certificate and Startup Punjab profile',
+      'Promoter Aadhaar and registered office lease in Punjab',
+      'Pitch deck and business plan'
+    ],
+    applicationSteps: [
+      '1. Register on Startup Punjab portal (pbindustries.gov.in).',
+      '2. Submit application for Sustenance Allowance and Seed Capital.',
+      '3. Attend evaluation meeting with District/State Steering Committee.',
+      '4. Sanction letter issued with monthly bank deposits.'
+    ],
+    gotchasAndNuances: [
+      'Must maintain active state tax and MCA filings in Punjab.',
+      'Electricity duty exemption must be linked to commercial meter account.'
+    ],
+    stackingTips: [
+      'Incubate at AIC-ISB Mohali or IIT Ropar to access world-class labs and VC networks.',
+      'Stack with SISFS seed funding via Punjab partner incubators.'
+    ],
+    officialLink: 'https://pbindustries.gov.in/',
+    domain: 'pbindustries.gov.in',
+    tags: ['Punjab', 'Mohali', 'Chandigarh', 'Sustenance', 'Electricity Exemption'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'partnership']
+  },
+
+  // 34. ASSAM STARTUP NEST (MAS)
+  {
+    id: 'assam-startup-nest',
+    slug: 'assam-startup-nest-sustenance-and-scaleup',
+    title: 'Startup Assam (MAS): ₹20k/Mo Sustenance + ₹5L Idea Grant',
+    category: 'stipend',
+    categoryLabel: 'Monthly Living Cash & Grants',
+    provider: 'Department of Industries & Commerce, Govt of Assam',
+    stateOrRegion: 'Assam',
+    valueAmount: '₹20,000/Mo Sustenance (1 Yr) + ₹5L Idea + Up to ₹50L Scaleup',
+    badge: 'Monthly Cash & Grants',
+    approvalTimeline: '4 to 6 weeks via Assam Startup Nest (Guwahati)',
+    executiveSummary: 'Living sustenance of ₹20,000/month for 12 months, idea-stage grants up to ₹5 Lakhs, and matching scale-up capital up to ₹50 Lakhs for startups registered in Assam, operated out of the Assam Startup Nest at Guwahati.',
+    whyFoundersCare: 'Gateway to Northeast India. Massive untapped regional markets in agritech, logistics, tea-tech, and healthtech with full government backing and zero founder equity dilution.',
+    eligibility: [
+      'Entity registered in Assam with registered office in the state',
+      'DPIIT Recognition Certificate and Mukhyamantrir Atmanirbharshil Asom (MAS) registration'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation & Assam address proof',
+      'DPIIT Recognition Certificate',
+      'Project proposal and milestone budget'
+    ],
+    applicationSteps: [
+      '1. Apply via the Assam Startup Portal (startup.assam.gov.in).',
+      '2. Pitch to the Assam Startup Nest evaluation committee at Ambari, Guwahati.',
+      '3. Sanction letter issued with monthly sustenance disbursals.'
+    ],
+    gotchasAndNuances: [
+      'Promoters must participate in scheduled incubation milestones.',
+      'Grant tranches released against verified prototype demonstrations.'
+    ],
+    stackingTips: [
+      'Access IIT Guwahati Technology Incubation Centre for advanced prototyping.',
+      'Stack with North East Venture Fund (NEVF) for institutional venture debt.'
+    ],
+    officialLink: 'https://startup.assam.gov.in/',
+    domain: 'startup.assam.gov.in',
+    tags: ['Assam', 'Guwahati', 'Northeast', 'Sustenance', 'Idea Grant'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'partnership']
+  },
+
+  // 35. ANDHRA PRADESH INNOVATION SOCIETY (APIS)
+  {
+    id: 'andhra-pradesh-innovation-society',
+    slug: 'andhra-pradesh-apis-seed-and-incubation',
+    title: 'AP Innovation Society (APIS): ₹10L Seed Grant & Vizag Hub',
+    category: 'grant',
+    categoryLabel: 'Non-Dilutive Seed Grant',
+    provider: 'ITE&C Department, Govt of Andhra Pradesh',
+    stateOrRegion: 'Andhra Pradesh',
+    valueAmount: 'Up to ₹10 Lakhs Seed Grant + Subsidized Co-Working',
+    badge: 'Seed Grant & Lab Space',
+    approvalTimeline: '4 to 8 weeks via APIS Innovation Hubs',
+    executiveSummary: 'Non-dilutive seed capital support up to ₹10 Lakhs, free or heavily subsidized plug-and-play co-working seats at the Millennium Tower / Vizag Tech Park, and patent filing reimbursements up to ₹2 Lakhs.',
+    whyFoundersCare: 'Visakhapatnam (Vizag) is a major port and IT center. APIS provides immediate physical infrastructure and grant cash so founders do not burn private capital on office leases and basic servers.',
+    eligibility: [
+      'Entity registered in Andhra Pradesh',
+      'DPIIT Recognition Certificate and APIS portal registration'
+    ],
+    documentsRequired: [
+      'Incorporation Certificate & AP GST registration',
+      'DPIIT Certificate and pitch deck',
+      'Promoter Aadhaar and bank details'
+    ],
+    applicationSteps: [
+      '1. Register on the AP Innovation Society portal (apis.ap.gov.in).',
+      '2. Submit application for Incubation Space and Seed Grant.',
+      '3. Pitch before the APIS Technical Screening Committee.',
+      '4. Sanction letter and milestone-based disbursement.'
+    ],
+    gotchasAndNuances: [
+      'Registered office must remain in Andhra Pradesh.',
+      'Seed funds must be spent on product testing and prototype verification.'
+    ],
+    stackingTips: [
+      'Stack with Andhra Pradesh MedTech Zone (AMTZ) for world-class medical device manufacturing.',
+      'Pair with Google for Startups cloud credits.'
+    ],
+    officialLink: 'https://apis.ap.gov.in/',
+    domain: 'apis.ap.gov.in',
+    tags: ['Andhra Pradesh', 'Vizag', 'APIS', 'Seed Grant', 'Co-Working'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed'],
+    entityTypes: ['pvt_ltd', 'llp', 'partnership']
   }
 ];

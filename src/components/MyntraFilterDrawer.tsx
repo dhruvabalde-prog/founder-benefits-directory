@@ -8,6 +8,7 @@ export interface FilterState {
   states: string[];
   stages: string[];
   sectors: string[];
+  entities: string[];
 }
 
 interface MyntraFilterDrawerProps {
@@ -19,24 +20,32 @@ interface MyntraFilterDrawerProps {
 }
 
 const CATEGORY_OPTIONS = [
-  { id: 'stipend', label: 'Monthly Stipends' },
-  { id: 'grant', label: 'Non-Dilutive Grants' },
-  { id: 'cloud', label: 'Cloud & AI Compute' },
-  { id: 'banking', label: 'Founder Banking' },
-  { id: 'arbitrage', label: 'State Hacks' }
+  { id: 'stipend', label: 'Monthly Stipends & Living Cash' },
+  { id: 'grant', label: 'Non-Dilutive Equity-Free Grants' },
+  { id: 'cloud', label: 'Cloud, AI Compute & SaaS Packs' },
+  { id: 'banking', label: '3-Year Zero-Balance Current Accounts' },
+  { id: 'arbitrage', label: 'Cross-State Arbitrage & Tax Shields' }
+];
+
+const ENTITY_OPTIONS = [
+  { id: 'pvt_ltd', label: 'Private Limited Company (DPIIT & VC)' },
+  { id: 'llp', label: 'Limited Liability Partnership (LLP)' },
+  { id: 'partnership', label: 'Registered Partnership Firm' },
+  { id: 'sole_proprietorship', label: 'Sole Proprietorship (MSME/PMEGP)' },
+  { id: 'delaware_c_corp', label: 'US Delaware C-Corp / Cross-Border' }
 ];
 
 const STAGE_OPTIONS = [
-  { id: 'idea', label: 'Idea Stage' },
-  { id: 'bootstrapped', label: 'Bootstrapped / MVP' },
-  { id: 'funded', label: 'Institutional / Seed' }
+  { id: 'idea', label: 'Idea Stage (Zero Code / Prototype)' },
+  { id: 'bootstrapped', label: 'Bootstrapped / MVP In Market' },
+  { id: 'funded', label: 'Institutional / Seed-Backed' }
 ];
 
 const SECTOR_OPTIONS = [
-  { id: 'ai_saas', label: 'AI, LLMs & SaaS' },
-  { id: 'biotech', label: 'BioTech & Health' },
-  { id: 'hardware', label: 'Hardware & IoT' },
-  { id: 'general', label: 'General Tech & D2C' }
+  { id: 'ai_saas', label: 'AI, LLMs, Developer Tools & SaaS' },
+  { id: 'biotech', label: 'BioTech, Diagnostics & HealthTech' },
+  { id: 'hardware', label: 'Hardware, IoT, Robotics & ESDM' },
+  { id: 'general', label: 'General Tech, Consumer & D2C' }
 ];
 
 export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
@@ -46,11 +55,10 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
   onApplyFilters,
   onResetFilters
 }) => {
-  const [activeTab, setActiveTab] = useState<'category' | 'state' | 'stage' | 'sector'>('category');
+  const [activeTab, setActiveTab] = useState<'category' | 'entity' | 'state' | 'stage' | 'sector'>('category');
   const [draftFilters, setDraftFilters] = useState<FilterState>(filters);
   const [stateSearch, setStateSearch] = useState('');
 
-  // Sync draft when opened
   React.useEffect(() => {
     if (isOpen) {
       setDraftFilters(filters);
@@ -58,7 +66,7 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
     }
   }, [isOpen, filters]);
 
-  // Dependent calculation: Calculate count of items matching other facets + candidate value
+  // Dependent calculation for real-time counts
   const getDependentCount = (type: keyof FilterState, value: string) => {
     return MASTER_CATALOG.filter((item) => {
       // 1. Category check
@@ -68,7 +76,14 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
         if (!draftFilters.categories.includes(item.category)) return false;
       }
 
-      // 2. State check
+      // 2. Entity check
+      if (type === 'entities') {
+        if (item.entityTypes && !item.entityTypes.includes(value as any)) return false;
+      } else if (draftFilters.entities.length > 0) {
+        if (item.entityTypes && !item.entityTypes.some(e => draftFilters.entities.includes(e))) return false;
+      }
+
+      // 3. State check
       if (type === 'states') {
         const matchesThis =
           item.stateOrRegion === value ||
@@ -91,11 +106,13 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
     }).length;
   };
 
-  // Total matching items with current draft
   const totalMatchingCount = useMemo(() => {
     return MASTER_CATALOG.filter((item) => {
       if (draftFilters.categories.length > 0 && !draftFilters.categories.includes(item.category)) {
         return false;
+      }
+      if (draftFilters.entities.length > 0 && item.entityTypes) {
+        if (!item.entityTypes.some(e => draftFilters.entities.includes(e))) return false;
       }
       if (draftFilters.states.length > 0) {
         const matches = draftFilters.states.some(
@@ -125,7 +142,7 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
   };
 
   const handleClear = () => {
-    const empty: FilterState = { categories: [], states: [], stages: [], sectors: [] };
+    const empty: FilterState = { categories: [], states: [], stages: [], sectors: [], entities: [] };
     setDraftFilters(empty);
     onResetFilters();
   };
@@ -143,12 +160,13 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
     draftFilters.categories.length +
     draftFilters.states.length +
     draftFilters.stages.length +
-    draftFilters.sectors.length;
+    draftFilters.sectors.length +
+    draftFilters.entities.length;
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-xs transition-opacity animate-in fade-in">
       <div 
-        className="w-full sm:max-w-lg bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col h-[82vh] sm:h-[650px] max-h-[90vh] overflow-hidden border border-stone-200"
+        className="w-full sm:max-w-lg bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col h-[84vh] sm:h-[660px] max-h-[92vh] overflow-hidden border border-stone-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header */}
@@ -191,11 +209,11 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
         {/* 2-Column Myntra Layout */}
         <div className="flex-1 flex min-h-0 overflow-hidden">
           {/* Left Vertical Categories Rail */}
-          <div className="w-[38%] border-r border-stone-200 bg-[#fafaf8] overflow-y-auto">
+          <div className="w-[40%] border-r border-stone-200 bg-[#fafaf8] overflow-y-auto">
             <button
               type="button"
               onClick={() => setActiveTab('category')}
-              className={`w-full px-3.5 py-3.5 text-left text-xs font-serif font-bold transition-colors flex items-center justify-between border-l-3 ${
+              className={`w-full px-3 py-3 text-left text-xs font-serif font-bold transition-colors flex items-center justify-between border-l-3 ${
                 activeTab === 'category'
                   ? 'bg-white border-[#274e37] text-[#274e37]'
                   : 'border-transparent text-stone-600 hover:bg-stone-100/70'
@@ -211,8 +229,25 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
 
             <button
               type="button"
+              onClick={() => setActiveTab('entity')}
+              className={`w-full px-3 py-3 text-left text-xs font-serif font-bold transition-colors flex items-center justify-between border-l-3 ${
+                activeTab === 'entity'
+                  ? 'bg-white border-[#274e37] text-[#274e37]'
+                  : 'border-transparent text-stone-600 hover:bg-stone-100/70'
+              }`}
+            >
+              <span>Startup Legal Type</span>
+              {draftFilters.entities.length > 0 && (
+                <span className="w-4 h-4 rounded-full bg-[#274e37] text-white font-mono text-[10px] flex items-center justify-center">
+                  {draftFilters.entities.length}
+                </span>
+              )}
+            </button>
+
+            <button
+              type="button"
               onClick={() => setActiveTab('state')}
-              className={`w-full px-3.5 py-3.5 text-left text-xs font-serif font-bold transition-colors flex items-center justify-between border-l-3 ${
+              className={`w-full px-3 py-3 text-left text-xs font-serif font-bold transition-colors flex items-center justify-between border-l-3 ${
                 activeTab === 'state'
                   ? 'bg-white border-[#274e37] text-[#274e37]'
                   : 'border-transparent text-stone-600 hover:bg-stone-100/70'
@@ -229,7 +264,7 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
             <button
               type="button"
               onClick={() => setActiveTab('stage')}
-              className={`w-full px-3.5 py-3.5 text-left text-xs font-serif font-bold transition-colors flex items-center justify-between border-l-3 ${
+              className={`w-full px-3 py-3 text-left text-xs font-serif font-bold transition-colors flex items-center justify-between border-l-3 ${
                 activeTab === 'stage'
                   ? 'bg-white border-[#274e37] text-[#274e37]'
                   : 'border-transparent text-stone-600 hover:bg-stone-100/70'
@@ -246,7 +281,7 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
             <button
               type="button"
               onClick={() => setActiveTab('sector')}
-              className={`w-full px-3.5 py-3.5 text-left text-xs font-serif font-bold transition-colors flex items-center justify-between border-l-3 ${
+              className={`w-full px-3 py-3 text-left text-xs font-serif font-bold transition-colors flex items-center justify-between border-l-3 ${
                 activeTab === 'sector'
                   ? 'bg-white border-[#274e37] text-[#274e37]'
                   : 'border-transparent text-stone-600 hover:bg-stone-100/70'
@@ -262,7 +297,7 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
           </div>
 
           {/* Right Pane: Checkbox Options List */}
-          <div className="w-[62%] bg-white p-3 sm:p-4 overflow-y-auto space-y-2">
+          <div className="w-[60%] bg-white p-3 sm:p-4 overflow-y-auto space-y-2">
             {activeTab === 'category' && (
               <div className="space-y-1">
                 {CATEGORY_OPTIONS.map((opt) => {
@@ -281,6 +316,37 @@ export const MyntraFilterDrawer: React.FC<MyntraFilterDrawerProps> = ({
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => toggleArrayOption('categories', opt.id)}
+                          className="w-4 h-4 rounded border-stone-300 text-[#274e37] focus:ring-[#274e37] accent-[#274e37]"
+                        />
+                        <span>{opt.label}</span>
+                      </div>
+                      <span className="font-mono text-[11px] text-stone-400">
+                        ({count})
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
+            )}
+
+            {activeTab === 'entity' && (
+              <div className="space-y-1">
+                {ENTITY_OPTIONS.map((opt) => {
+                  const isChecked = draftFilters.entities.includes(opt.id);
+                  const count = getDependentCount('entities', opt.id);
+
+                  return (
+                    <label
+                      key={opt.id}
+                      className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-colors text-xs ${
+                        isChecked ? 'bg-[#f2f7f4] text-[#274e37] font-semibold' : 'hover:bg-stone-50 text-stone-700'
+                      }`}
+                    >
+                      <div className="flex items-center space-x-2.5">
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => toggleArrayOption('entities', opt.id)}
                           className="w-4 h-4 rounded border-stone-300 text-[#274e37] focus:ring-[#274e37] accent-[#274e37]"
                         />
                         <span>{opt.label}</span>
