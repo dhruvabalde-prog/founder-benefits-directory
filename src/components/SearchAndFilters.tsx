@@ -1,8 +1,7 @@
 import React from 'react';
-import { Search, X, SlidersHorizontal, MapPin, Building, Landmark, Cloud } from 'lucide-react';
+import { Search, X, MapPin } from 'lucide-react';
 import { CategoryType } from '../types';
 import { STATES_LIST } from '../data/matrix';
-import { CATEGORY_LABELS } from '../data/allBenefits';
 
 interface SearchAndFiltersProps {
   searchQuery: string;
@@ -16,17 +15,22 @@ interface SearchAndFiltersProps {
   totalResults: number;
 }
 
-const QUICK_TAGS = [
-  'Non-dilutive',
-  'Tax Exemption',
-  'Women Founders',
-  'SC/ST',
-  'Zero Balance',
-  'Collateral-Free',
-  'No Funding Required',
-  'Delaware C-Corp',
-  'AI / LLM',
-  'Patents'
+const CATEGORY_TABS: { id: CategoryType; label: string; icon: string }[] = [
+  { id: 'all', label: 'All', icon: '⚡' },
+  { id: 'government', label: 'Govt Schemes', icon: '🏛️' },
+  { id: 'banking', label: 'Banking', icon: '🏦' },
+  { id: 'saas_perks', label: 'Free Credits', icon: '☁️' }
+];
+
+const ARCHETYPE_CHIPS = [
+  { tag: 'Bootstrapped', label: 'Bootstrapped' },
+  { tag: 'Women Founders', label: 'Women >51%' },
+  { tag: 'Non-dilutive', label: 'Grants' },
+  { tag: 'Zero Balance', label: 'Zero Balance' },
+  { tag: 'Tax Exemption', label: 'Tax Holiday' },
+  { tag: 'AI / LLM', label: 'AI & LLM' },
+  { tag: 'Biotech', label: 'BioTech' },
+  { tag: 'Delaware C-Corp', label: 'US Delaware' }
 ];
 
 export const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
@@ -41,128 +45,98 @@ export const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
   totalResults
 }) => {
   return (
-    <div className="space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800 shadow-xl">
-      {/* Search Input & State Selector */}
-      <div className="flex flex-col md:flex-row gap-3">
+    <div className="space-y-3">
+      {/* Search Bar + State Select */}
+      <div className="flex items-center gap-2">
         <div className="relative flex-1">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Search schemes, banking perks, cloud credits (e.g., 'SISFS', 'Zero Balance', 'AWS', 'Women')..."
+            placeholder="Search schemes, banks, credits, rules..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-10 py-2.5 bg-slate-950 border border-slate-700/80 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all"
+            className="w-full pl-10 pr-9 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1"
             >
-              <X className="w-4 h-4" />
+              <X className="w-3.5 h-3.5" />
             </button>
           )}
         </div>
 
-        {/* State Filter */}
-        <div className="relative min-w-[200px]">
-          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-indigo-400 pointer-events-none" />
+        {/* State select */}
+        <div className="relative shrink-0">
           <select
             value={selectedState}
             onChange={(e) => setSelectedState(e.target.value)}
-            className="w-full pl-9 pr-8 py-2.5 bg-slate-950 border border-slate-700/80 rounded-xl text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer"
+            className="pl-3 pr-7 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 text-xs font-semibold focus:outline-none focus:border-indigo-500 appearance-none cursor-pointer"
           >
             {STATES_LIST.map((state) => (
               <option key={state} value={state}>
-                {state === 'All India' ? '📍 All India / Central' : `🏛️ ${state} Policy`}
+                {state === 'All India' ? '📍 All India' : `📍 ${state}`}
               </option>
             ))}
           </select>
+          <MapPin className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500 pointer-events-none" />
         </div>
       </div>
 
-      {/* Main Category Tabs */}
-      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800/80">
-        <button
-          onClick={() => setSelectedCategory('all')}
-          className={`flex items-center space-x-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-            selectedCategory === 'all'
-              ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
-              : 'bg-slate-950/80 text-slate-400 hover:text-slate-200 border border-slate-800'
-          }`}
-        >
-          <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>{CATEGORY_LABELS.all}</span>
-        </button>
-
-        <button
-          onClick={() => setSelectedCategory('government')}
-          className={`flex items-center space-x-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-            selectedCategory === 'government'
-              ? 'bg-amber-600 text-white shadow-md shadow-amber-600/30'
-              : 'bg-slate-950/80 text-slate-400 hover:text-slate-200 border border-slate-800'
-          }`}
-        >
-          <Landmark className="w-3.5 h-3.5 text-amber-300" />
-          <span>{CATEGORY_LABELS.government}</span>
-        </button>
-
-        <button
-          onClick={() => setSelectedCategory('banking')}
-          className={`flex items-center space-x-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-            selectedCategory === 'banking'
-              ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30'
-              : 'bg-slate-950/80 text-slate-400 hover:text-slate-200 border border-slate-800'
-          }`}
-        >
-          <Building className="w-3.5 h-3.5 text-emerald-300" />
-          <span>{CATEGORY_LABELS.banking}</span>
-        </button>
-
-        <button
-          onClick={() => setSelectedCategory('saas_perks')}
-          className={`flex items-center space-x-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-            selectedCategory === 'saas_perks'
-              ? 'bg-cyan-600 text-white shadow-md shadow-cyan-600/30'
-              : 'bg-slate-950/80 text-slate-400 hover:text-slate-200 border border-slate-800'
-          }`}
-        >
-          <Cloud className="w-3.5 h-3.5 text-cyan-300" />
-          <span>{CATEGORY_LABELS.saas_perks}</span>
-        </button>
+      {/* Category Pills (Minimal) */}
+      <div className="flex items-center space-x-1.5 overflow-x-auto pb-1 scrollbar-none">
+        {CATEGORY_TABS.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setSelectedCategory(tab.id)}
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all ${
+              selectedCategory === tab.id
+                ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30'
+                : 'bg-slate-900/90 text-slate-400 hover:text-white border border-slate-800'
+            }`}
+          >
+            <span>{tab.icon}</span>
+            <span>{tab.label}</span>
+          </button>
+        ))}
       </div>
 
-      {/* Quick Filter Tags & Results Counter */}
-      <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
-        <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-slate-400 text-[11px] font-semibold uppercase tracking-wider mr-1">
-            Trending:
-          </span>
-          {QUICK_TAGS.map((tag) => (
+      {/* Archetype Quick Filter Chips */}
+      <div className="flex items-center space-x-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px]">
+        {ARCHETYPE_CHIPS.map(({ tag, label }) => {
+          const isActive = selectedTag === tag;
+          return (
             <button
               key={tag}
-              onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
-                selectedTag === tag
-                  ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/50'
-                  : 'bg-slate-950 text-slate-400 hover:text-slate-200 border border-slate-800/80'
+              onClick={() => setSelectedTag(isActive ? null : tag)}
+              className={`px-2.5 py-1 rounded-md whitespace-nowrap font-medium transition-colors ${
+                isActive
+                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold'
+                  : 'bg-slate-900/60 text-slate-400 hover:text-slate-300 border border-slate-800/80'
               }`}
             >
-              #{tag}
+              {label}
             </button>
-          ))}
-          {selectedTag && (
-            <button
-              onClick={() => setSelectedTag(null)}
-              className="text-xs text-rose-400 hover:underline ml-1"
-            >
-              Clear tag
-            </button>
-          )}
-        </div>
+          );
+        })}
 
-        <div className="text-slate-400 text-xs font-medium">
-          Showing <span className="text-white font-bold">{totalResults}</span> programs
-        </div>
+        {selectedTag && (
+          <button
+            onClick={() => setSelectedTag(null)}
+            className="text-xs text-rose-400 font-semibold hover:underline shrink-0 px-1"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+
+      {/* Result Counter */}
+      <div className="flex items-center justify-between text-[11px] text-slate-400 pt-0.5">
+        <span>{totalResults} programs</span>
+        {selectedState !== 'All India' && (
+          <span className="text-indigo-400 font-medium">{selectedState} focus</span>
+        )}
       </div>
     </div>
   );
