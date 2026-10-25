@@ -5,7 +5,7 @@ import { AppBottomNav } from './components/AppBottomNav';
 import { HomePage } from './pages/HomePage';
 import { DetailPage } from './pages/DetailPage';
 import { HacksPage } from './pages/HacksPage';
-import { CalculatorPage } from './pages/CalculatorPage';
+import { ToolsPage } from './pages/ToolsPage';
 import { SavedPage } from './pages/SavedPage';
 import { ArrowUpRight } from 'lucide-react';
 import { FilterState } from './components/MyntraFilterDrawer';
@@ -89,14 +89,15 @@ export const App: React.FC = () => {
             />
             <Route path="/hacks" element={<HacksPage />} />
             <Route
-              path="/calculator"
+              path="/tools"
               element={
-                <CalculatorPage
+                <ToolsPage
                   bookmarkedIds={bookmarkedIds}
                   onToggleBookmark={toggleBookmark}
                 />
               }
             />
+            <Route path="/calculator" element={<Navigate to="/tools" replace />} />
             <Route
               path="/saved"
               element={
@@ -112,11 +113,7 @@ export const App: React.FC = () => {
         </main>
 
         {/* Mobile First Bottom Navigation Bar */}
-        <AppBottomNav
-          savedCount={bookmarkedIds.length}
-          activeFilterCount={activeFilterCount}
-          onOpenFilterDrawer={() => setIsFilterOpen(true)}
-        />
+        <AppBottomNav />
 
         {/* Desktop Footer */}
         <footer className="hidden sm:block border-t border-stone-200/80 bg-[#fdfdfc] py-6 text-xs text-stone-500">

@@ -562,5 +562,376 @@ export const MASTER_CATALOG: MasterItem[] = [
     domain: 'startupindia.gov.in',
     tags: ['Patents', 'DPIIT', 'Double Dip', 'Zero Cost IP', 'Arbitrage'],
     founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed']
+  },
+
+  // 13. UTTAR PRADESH STARTUP POLICY (STARTINUP)
+  {
+    id: 'startinup-uttar-pradesh',
+    slug: 'startinup-uttar-pradesh-sustenance-and-seed',
+    title: 'StartInUP Sustenance Allowance & Seed Capital',
+    category: 'stipend',
+    categoryLabel: 'Monthly Living Cash & Grant',
+    provider: 'Department of IT & Electronics, Govt of Uttar Pradesh',
+    stateOrRegion: 'Uttar Pradesh',
+    valueAmount: '₹17.5k/Mo (1 Yr) + ₹5L Marketing + ₹50L Seed',
+    badge: 'Monthly Cash & Grants',
+    approvalTimeline: '4 to 8 weeks via registered UP Nodal Center',
+    executiveSummary: 'Direct monthly sustenance allowance of ₹17,500/month for 12 months, plus ₹5 Lakhs marketing & prototyping grant, and up to ₹50 Lakhs in seed-stage capital support via certified incubators (IIT Kanpur, IIM Lucknow, AKTU).',
+    whyFoundersCare: 'Enables founders in Noida, Greater Noida, Lucknow, and Kanpur to build their venture with guaranteed personal burn coverage and institutional incubator access without immediate dilution.',
+    eligibility: [
+      'Registered entity with registered office in Uttar Pradesh',
+      'DPIIT Recognition Certificate and StartInUP registration',
+      'Entity incorporated for less than 10 years with turnover under ₹100 Crore',
+      'Startups must be physically or virtually incubated at an approved UP incubator'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation / LLP Agreement',
+      'StartInUP Registration Number & DPIIT Certificate',
+      'Promoter Aadhaar Card & proof of registered office in UP',
+      'Detailed pitch deck with 12-month milestone execution plan',
+      'Recommendation letter from a recognized UP incubator'
+    ],
+    applicationSteps: [
+      '1. Create an account on the StartInUP portal (startinup.up.gov.in).',
+      '2. Link your DPIIT registration and choose a partner incubator (e.g. IIT Kanpur, IIM Lucknow).',
+      '3. Submit application for Monthly Sustenance Allowance and Prototyping Grant.',
+      '4. Present your pitch deck before the State Evaluation Committee.',
+      '5. Execute agreement and receive direct monthly bank transfers.'
+    ],
+    gotchasAndNuances: [
+      'Incubator recommendation is mandatory before the state committee reviews your grant application.',
+      'Noida/Greater Noida startups must have active lease or registered office documents within Gautam Buddha Nagar district.'
+    ],
+    stackingTips: [
+      'Noida SaaS founders can combine UP sustenance money with Microsoft Founders Hub $150k compute to eliminate infrastructure costs.',
+      'Stack with Central SISFS seed fund via IIT Kanpur or BIMTECH incubators.'
+    ],
+    officialLink: 'https://startinup.up.gov.in/',
+    domain: 'startinup.up.gov.in',
+    tags: ['Uttar Pradesh', 'Noida', 'Lucknow', 'Sustenance', 'Seed Grant'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed']
+  },
+
+  // 14. TAMIL NADU STARTUPTN & TANSEED
+  {
+    id: 'startuptn-tanseed',
+    slug: 'startuptn-tanseed-equity-free-seed-grant',
+    title: 'StartupTN TANSEED Equity-Free Seed Fund',
+    category: 'grant',
+    categoryLabel: 'Non-Dilutive Grant',
+    provider: 'Tamil Nadu Startup and Innovation Mission (TANSIM)',
+    stateOrRegion: 'Tamil Nadu',
+    valueAmount: '₹10 Lakhs – ₹15 Lakhs Equity-Free Grant',
+    badge: '100% Equity-Free Cash',
+    approvalTimeline: '6 to 10 weeks via TANSEED edition cohorts',
+    executiveSummary: 'Direct non-dilutive grant of ₹10 Lakhs (₹15 Lakhs for women-led, rural, or green-tech startups) provided in milestone tranches to early-stage startups registered in Tamil Nadu.',
+    whyFoundersCare: '100% non-dilutive grant without warrants, board seats, or equity conversion. Backed by the StartupTN Smart Card, which gives ₹5 Lakhs in free credits across AWS, Zoho, Freshworks, and PayU.',
+    eligibility: [
+      'Registered entity with registered office in Tamil Nadu',
+      'DPIIT Recognition Certificate and StartupTN registration',
+      'Entity must have working prototype / MVP with customer validation'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation & GST Certificate in Tamil Nadu',
+      'StartupTN Registration details & DPIIT Certificate',
+      'Demo video or live product link',
+      'CA-certified provisional financial statements',
+      'Pitch deck and detailed fund utilization breakdown'
+    ],
+    applicationSteps: [
+      '1. Register your entity on the StartupTN portal (startuptn.in).',
+      '2. Apply during the open TANSEED cohort window (conducted multiple times a year).',
+      '3. Complete initial document verification and preliminary screening.',
+      '4. Pitch before the Grand Jury of venture capitalists and sector experts.',
+      '5. Selected startups receive funds in 3 milestone tranches directly into their company bank account.'
+    ],
+    gotchasAndNuances: [
+      'You cannot shift your corporate registered office outside Tamil Nadu for 3 years post-disbursement.',
+      'Tranches are tied to milestones (Tranche 1: 30%, Tranche 2: 40%, Tranche 3: 30%).'
+    ],
+    stackingTips: [
+      'Stack TANSEED with StartupTN Smart Card for zero-fee payment gateways and legal advisory.',
+      'Pair with SISFS grants from IIT Madras Research Park or Anna Incubator.'
+    ],
+    officialLink: 'https://startuptn.in/',
+    domain: 'startuptn.in',
+    tags: ['Tamil Nadu', 'Chennai', 'TANSEED', 'Equity-Free Grant', 'Coimbatore'],
+    founderStage: ['bootstrapped', 'pre_seed', 'seed']
+  },
+
+  // 15. KERALA STARTUP MISSION (KSUM)
+  {
+    id: 'kerala-startup-mission-ksum',
+    slug: 'kerala-startup-mission-idea-and-scaleup-grants',
+    title: 'Kerala Startup Mission (KSUM) Grants & Soft Loans',
+    category: 'grant',
+    categoryLabel: 'Non-Dilutive Grant & Soft Loan',
+    provider: 'Kerala Startup Mission (KSUM), Govt of Kerala',
+    stateOrRegion: 'Kerala',
+    valueAmount: '₹12L Idea Grant + ₹15L Scale-up Loan + ₹10L Patent',
+    badge: 'Grants & Soft Capital',
+    approvalTimeline: '4 to 6 weeks through KSUM Pitch Days',
+    executiveSummary: 'Non-dilutive Idea Grant of up to ₹12 Lakhs for prototype validation, plus soft seed loan of up to ₹15 Lakhs at low interest with zero personal collateral, and international patent reimbursement up to ₹10 Lakhs.',
+    whyFoundersCare: 'Kerala offers India\'s most comprehensive soft-capital ecosystem. You get low-cost capital and access to the Integrated Startup Complex at Kalamassery, one of the largest prototyping hubs in South Asia.',
+    eligibility: [
+      'Startup registered in Kerala or willing to establish a registered office in Kerala',
+      'DPIIT-recognized and registered on the KSUM portal',
+      'Innovations in DeepTech, BioTech, AI, MarineTech, or Hardware prioritized'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation & KSUM Unique ID',
+      'Project proposal with prototype photos and BOM (Bill of Materials)',
+      'Aadhaar of founders and Kerala address proof',
+      'Utilization plan for grant capital'
+    ],
+    applicationSteps: [
+      '1. Register on the KSUM portal (startupmission.kerala.gov.in) and obtain a Unique ID.',
+      '2. Submit application for Idea Grant or Early Stage Scale-Up Soft Loan.',
+      '3. Attend KSUM Monthly Pitch Day before the expert evaluation panel.',
+      '4. Sanction letter issued within 14 days of pitch approval.',
+      '5. Funds disbursed against stage milestones.'
+    ],
+    gotchasAndNuances: [
+      'Soft loans require clean credit bureau records for all directors.',
+      'Idea grants are strictly non-dilutive; scale-up loans have a 1-year moratorium before interest starts.'
+    ],
+    stackingTips: [
+      'Use KSUM Maker Village for subsidized hardware testing, SMT fabrication, and 3D printing.',
+      'Combine with BIRAC BIG if building health-tech or medical devices.'
+    ],
+    officialLink: 'https://startupmission.kerala.gov.in/',
+    domain: 'startupmission.kerala.gov.in',
+    tags: ['Kerala', 'Kochi', 'KSUM', 'Idea Grant', 'Soft Loan'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed']
+  },
+
+  // 16. TELANGANA T-HUB & WE-HUB
+  {
+    id: 'telangana-thub-wehub',
+    slug: 'telangana-thub-wehub-seed-and-prototyping',
+    title: 'Telangana T-Hub Seed Fund & T-Works Prototyping',
+    category: 'grant',
+    categoryLabel: 'Seed Grant & Hardware Lab',
+    provider: 'IT, E&C Department, Govt of Telangana',
+    stateOrRegion: 'Telangana',
+    valueAmount: 'Up to ₹25L T-Fund + ₹25k/Mo Women Sustenance',
+    badge: 'Prototyping & Capital',
+    approvalTimeline: '4 to 8 weeks via T-Hub / WE-Hub cohort',
+    executiveSummary: 'Access to T-Fund co-investment checks up to ₹25 Lakhs, ₹25,000/month living sustenance for women-led startups via WE-Hub, and 100% subsidized access to T-Works (India\'s largest hardware prototyping facility).',
+    whyFoundersCare: 'Hyderabad is India\'s top hub for hardware, life sciences, and enterprise SaaS. T-Works gives you free access to industrial laser cutters, CNC machines, and PCB surface-mount equipment that normally costs crores.',
+    eligibility: [
+      'Entity registered in Telangana or operating out of Hyderabad',
+      'For WE-Hub sustenance: Woman founder with 51%+ shareholding',
+      'For T-Works hardware subsidies: Working prototype with physical Bill of Materials'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation & Telangana GST registration',
+      'DPIIT Certificate and T-Hub portal profile',
+      'Founder KYC & Bank statements',
+      'Hardware CAD files or software architecture document'
+    ],
+    applicationSteps: [
+      '1. Apply via the T-Hub portal (t-hub.co) or WE-Hub (wehub.telangana.gov.in).',
+      '2. Choose your focus track (T-Fund, WE-Hub Incubation, or T-Works Hardware Prototyping).',
+      '3. Pitch to the selection committee during the open cohort call.',
+      '4. Finalize incubation agreement and unlock facility passes and grant disbursements.'
+    ],
+    gotchasAndNuances: [
+      'T-Fund operates as co-investment matching institutional or angel capital.',
+      'WE-Hub sustenance requires active physical participation in designated masterclasses.'
+    ],
+    stackingTips: [
+      'Combine T-Hub software incubation with Google for Startups $350k Vertex AI credits.',
+      'Stack T-Works prototyping with MeitY TIDE 2.0 grants.'
+    ],
+    officialLink: 'https://t-hub.co/',
+    domain: 't-hub.co',
+    tags: ['Telangana', 'Hyderabad', 'T-Hub', 'WE-Hub', 'Hardware'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed']
+  },
+
+  // 17. STARTUP ODISHA
+  {
+    id: 'startup-odisha',
+    slug: 'startup-odisha-monthly-sustenance-and-seed',
+    title: 'Startup Odisha Monthly Sustenance & Seed Grant',
+    category: 'stipend',
+    categoryLabel: 'Monthly Living Cash & Grant',
+    provider: 'MSME Department, Government of Odisha',
+    stateOrRegion: 'Odisha',
+    valueAmount: '₹20k–₹22k/Mo (1 Yr) + Up to ₹16L Seed Grant',
+    badge: 'Monthly Cash & Grant',
+    approvalTimeline: '3 to 5 weeks from online evaluation pitch',
+    executiveSummary: 'Guaranteed monthly sustenance allowance of ₹20,000/month (₹22,000/mo for women, SC/ST, and persons with disabilities) for 12 months, plus product development and marketing assistance grant up to ₹16 Lakhs.',
+    whyFoundersCare: 'Bhubaneswar offers very low cost of living. Combining ₹2.4 Lakhs in guaranteed annual founder sustenance with a ₹16 Lakhs grant allows a 3-person team to build with 18+ months of zero-dilution runway.',
+    eligibility: [
+      'Entity registered in Odisha with active state GST or Udyam',
+      'DPIIT Recognition Certificate and Startup Odisha recognition',
+      'Incorporated for not more than 10 years'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation / Partnership Deed',
+      'Promoter Aadhaar and proof of Odisha registered office',
+      'Pitch deck with clear product roadmap and 12-month expenditure budget',
+      'Bank statement of entity current account'
+    ],
+    applicationSteps: [
+      '1. Register on the Startup Odisha portal (startupodisha.gov.in).',
+      '2. Apply for Recognition as an Odisha Startup.',
+      '3. Once recognized, apply for the Monthly Allowance & Product Development Grant.',
+      '4. Attend the virtual pitch session before the Task Force.',
+      '5. Monthly allowance credited automatically to founder bank account.'
+    ],
+    gotchasAndNuances: [
+      'Grant funds are released in tranches against milestone verification by recognized state incubators.',
+      'Founders cannot draw concurrent salary from any other institution while claiming the monthly allowance.'
+    ],
+    stackingTips: [
+      'Use KIIT-TBI (one of India\'s top bio-incubators) for world-class laboratory access.',
+      'Stack with SISFS via Odisha-approved university incubators.'
+    ],
+    officialLink: 'https://startupodisha.gov.in/',
+    domain: 'startupodisha.gov.in',
+    tags: ['Odisha', 'Bhubaneswar', 'Sustenance', 'Seed Grant', 'Living Cash'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed']
+  },
+
+  // 18. HARYANA STARTUP POLICY
+  {
+    id: 'haryana-startup-policy',
+    slug: 'haryana-startup-sustenance-and-sgst-rebate',
+    title: 'Haryana Startup Policy Sustenance & 50% SGST Rebate',
+    category: 'stipend',
+    categoryLabel: 'Living Cash & Tax Rebate',
+    provider: 'Department of IT, Electronics & Communication, Govt of Haryana',
+    stateOrRegion: 'Haryana',
+    valueAmount: '₹20k/Mo (1 Yr) + ₹5L Seed + 50% SGST Rebate (7 Yrs)',
+    badge: 'Monthly Cash & Tax Shield',
+    approvalTimeline: '4 to 6 weeks via Haryana Enterprise Promotion Board',
+    executiveSummary: 'Monthly sustenance allowance of ₹20,000/month for 1 year, seed capital support up to ₹5 Lakhs, 100% cloud credit reimbursement up to ₹1 Lakh, and 50% net SGST reimbursement for 7 consecutive years for startups in Gurugram, Faridabad, and Panchkula.',
+    whyFoundersCare: 'Gurugram is the venture capital and tech capital of North India. Operating here with state sustenance cash and a 7-year 50% SGST rebate gives massive tax savings on domestic SaaS and e-commerce transactions.',
+    eligibility: [
+      'Entity incorporated in Haryana with registered office in Gurugram, Faridabad, etc.',
+      'DPIIT Recognition Certificate and Haryana Startup registration',
+      'Incorporated for not more than 10 years'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation & Haryana GST registration',
+      'Registered office lease agreement in Haryana',
+      'DPIIT Recognition Certificate',
+      'Pitch deck and promoter KYC'
+    ],
+    applicationSteps: [
+      '1. Apply through the Haryana Enterprise Promotion Portal (investharyana.in).',
+      '2. Submit application for State Startup Recognition & Sustenance Allowance.',
+      '3. Attend evaluation meeting with the District/State Committee.',
+      '4. Sanction letter issued with monthly disbursals directly to bank account.'
+    ],
+    gotchasAndNuances: [
+      'Must have active GST registration within the state of Haryana.',
+      'SGST rebate is claimed annually against audited tax returns.'
+    ],
+    stackingTips: [
+      'Stack with Gurugram angel networks and Microsoft Founders Hub for full tech runway.',
+      'Use Haryana patent reimbursement up to ₹2 Lakhs per domestic patent.'
+    ],
+    officialLink: 'https://investharyana.in/',
+    domain: 'investharyana.in',
+    tags: ['Haryana', 'Gurugram', 'Faridabad', 'Sustenance', 'SGST Rebate'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed']
+  },
+
+  // 19. SECTION 80-IAC 3-YEAR 100% TAX HOLIDAY
+  {
+    id: 'section-80iac-tax-holiday',
+    slug: 'dpiit-section-80iac-3year-100percent-tax-holiday',
+    title: 'Section 80-IAC: 3-Year 100% Corporate Tax Holiday',
+    category: 'arbitrage',
+    categoryLabel: 'Tax Elimination Shield',
+    provider: 'DPIIT & Central Board of Direct Taxes (CBDT)',
+    stateOrRegion: 'All States / Central',
+    valueAmount: '100% Tax Exemption for 3 Consecutive Years',
+    badge: 'Zero Corporate Tax',
+    approvalTimeline: '2 to 4 months through Inter-Ministerial Board (IMB)',
+    executiveSummary: 'DPIIT-recognized Private Limited companies and LLPs incorporated after April 1, 2016 can claim 100% tax exemption on profits for 3 consecutive financial years out of their first 10 years under Section 80-IAC of the Income Tax Act.',
+    whyFoundersCare: 'Saves crores once you become cash-flow positive or profitable. You pay 0% corporate income tax, allowing you to reinvest 100% of your earnings back into R&D and hiring.',
+    eligibility: [
+      'Private Limited Company or LLP incorporated between April 1, 2016 and March 31, 2025',
+      'Must be DPIIT recognized and approved by the Inter-Ministerial Board (IMB)',
+      'Turnover must not exceed ₹100 Crore in any financial year',
+      'Must be engaged in innovation, development, or commercialization of new products/services'
+    ],
+    documentsRequired: [
+      'Certificate of Incorporation & Memorandum of Association (MoA)',
+      'DPIIT Recognition Certificate',
+      'Audited Financial Statements and CA-certified balance sheets for past 3 years (or since inception)',
+      'Video pitch link (2-3 minutes demonstrating product innovation & defensibility)',
+      'Form-1 application filled on Startup India portal'
+    ],
+    applicationSteps: [
+      '1. Log into your Startup India account and navigate to Section 80-IAC Exemption.',
+      '2. Fill Form-1 with detailed technical explanations of your proprietary innovation.',
+      '3. Upload audited financials, patent certificates, and 3-minute video presentation.',
+      '4. The Inter-Ministerial Board (IMB) convenes monthly to review applications.',
+      '5. Once approved, quote the IMB certificate in your annual ITR-6 filings to claim 100% profit deduction.'
+    ],
+    gotchasAndNuances: [
+      'IMB has a high rejection rate for conventional agencies or service businesses. The business model must show genuine technological innovation or patent defensibility.',
+      'Choose your 3-year block wisely—pick the years where your profitability is highest!'
+    ],
+    stackingTips: [
+      'Get a provisional patent or software copyright first—it dramatically improves your IMB approval chances.',
+      'Stack with GST LUT to eliminate both domestic corporate income tax and export GST.'
+    ],
+    officialLink: 'https://www.startupindia.gov.in/content/sih/en/tax-exemptions.html',
+    domain: 'startupindia.gov.in',
+    tags: ['Tax Holiday', 'Section 80-IAC', 'DPIIT', 'Zero Tax', 'Profit Shield'],
+    founderStage: ['bootstrapped', 'pre_seed', 'seed']
+  },
+
+  // 20. GEM GOVERNMENT PUBLIC PROCUREMENT ARBITRAGE
+  {
+    id: 'gem-public-procurement-preference',
+    slug: 'gem-public-procurement-zero-experience-arbitrage',
+    title: 'GeM Public Procurement: Zero Turnover & Experience Waiver',
+    category: 'arbitrage',
+    categoryLabel: 'Revenue Arbitrage',
+    provider: 'Government e-Marketplace (GeM) & Ministry of Commerce',
+    stateOrRegion: 'All States / Central',
+    valueAmount: 'Access to ₹2+ Lakh Crore Public Tender Market',
+    badge: 'Tender Waiver Arbitrage',
+    approvalTimeline: 'Immediate upon DPIIT linkage on GeM',
+    executiveSummary: 'Central government ministries and PSUs are legally mandated to procure at least 25% of annual requirements from MSMEs and startups. Under Rule 173(i) of General Financial Rules, all "Prior Experience" and "Prior Turnover" requirements are waived for DPIIT-recognized startups.',
+    whyFoundersCare: 'Solves the classic "need 3 years of audited turnover to win government contracts" catch-22. As a Day 1 startup, you can bid on and win multi-crore public sector contracts purely on technical capability and pricing.',
+    eligibility: [
+      'DPIIT-recognized startup',
+      'Registered on Government e-Marketplace (GeM) as an OEM or Seller',
+      'Entity must meet technical and quality specifications of the tender'
+    ],
+    documentsRequired: [
+      'DPIIT Startup Recognition Certificate',
+      'Company PAN, GST, and Udyam Registration',
+      'Technical specification compliance sheet',
+      'Bank mandate form for direct GeM treasury disbursements'
+    ],
+    applicationSteps: [
+      '1. Register on the GeM portal (gem.gov.in) with your company PAN and GST.',
+      '2. Navigate to "Startup Runway" on GeM and link your DPIIT DIPP number.',
+      '3. Search for open government bids in your domain (software, hardware, services, security).',
+      '4. Submit your technical and financial bid claiming exemption from prior turnover and experience under GFR Rule 173(i).',
+      '5. Once awarded, payments are settled directly via GeM within 10 days of service sign-off.'
+    ],
+    gotchasAndNuances: [
+      'Exemption applies to turnover and experience, NOT to technical compliance or security certifications.',
+      'Earnest Money Deposit (EMD) is also 100% waived for DPIIT startups.'
+    ],
+    stackingTips: [
+      'Winning even one PSU pilot tender instantly proves market traction for your next VC round.',
+      'Use GeM Startup Runway to showcase unique tech solutions directly to departmental buyers.'
+    ],
+    officialLink: 'https://gem.gov.in/',
+    domain: 'gem.gov.in',
+    tags: ['GeM', 'Government Tenders', 'Procurement', 'EMD Waiver', 'Public Sector'],
+    founderStage: ['idea', 'bootstrapped', 'pre_seed', 'seed']
   }
 ];

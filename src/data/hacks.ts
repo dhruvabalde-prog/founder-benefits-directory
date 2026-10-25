@@ -117,5 +117,89 @@ export const FOUNDER_HACKS: FounderHack[] = [
     legalComplianceRule: 'Ensure RBI Overseas Direct Investment (ODI) regulations and transfer pricing documentation (Form 3CEB) are filed annually.',
     estimatedFinancialGain: '$150k+ in US Cloud Credits + access to US VC checks + Indian R&D cost savings',
     applicableStates: ['Global / US Entities', 'All States / Central']
+  },
+  {
+    id: 'section-80iac-imb-approval-playbook',
+    title: 'The Section 80-IAC 3-Year 100% Tax Shield Playbook',
+    category: 'Tax Elimination',
+    oneLiner: 'How to structure your DPIIT Form-1 and video pitch before the Inter-Ministerial Board (IMB) to secure 3 consecutive years of 0% corporate tax.',
+    thePlaybook: [
+      'Step 1: File for at least one provisional patent, design registration, or software copyright before submitting Form-1.',
+      'Step 2: On the Startup India portal, navigate to Tax Exemption under Section 80-IAC.',
+      'Step 3: In the application essay, explicitly prove 3 pillars: High Innovation, High Employment Potential, and Scalable Wealth Creation (use official DPIIT buzzwords).',
+      'Step 4: Record a crisp 3-minute video showing your working product, client deployment dashboard, and algorithm architecture.',
+      'Step 5: The Inter-Ministerial Board (IMB) reviews monthly. Once sanctioned, you choose any 3 consecutive fiscal years within your first 10 years to pay 0% tax.'
+    ],
+    realWorldExample: 'A B2B SaaS startup in Pune scaled from ₹2Cr to ₹15Cr ARR. With their Section 80-IAC exemption active, they saved ₹1.8 Crores in corporate income tax over 3 years, reinvesting the entire cash pile into US sales expansion.',
+    legalComplianceRule: 'Entity must be a Pvt Ltd or LLP incorporated between April 1, 2016 and March 31, 2025 with turnover under ₹100Cr.',
+    estimatedFinancialGain: '100% corporate tax exemption for 3 consecutive financial years (saves ₹50L to ₹5Cr+)',
+    applicableStates: ['All States / Central']
+  },
+  {
+    id: 'startuptn-tanseed-angel-matching',
+    title: 'The StartupTN TANSEED 1:1 Co-Matching Hack',
+    category: 'State Grant Arbitrage',
+    oneLiner: 'How to use Tamil Nadu\'s ₹10L–₹15L TANSEED grant to match private angel capital without giving away equity warrants.',
+    thePlaybook: [
+      'Tamil Nadu TANSIM conducts regular cohort calls for TANSEED (₹10 Lakhs equity-free grant, ₹15L for women/SC/ST/rural founders).',
+      'When pitching to angel syndicates or incubators in Chennai/Coimbatore, propose a matching structure: "We raise ₹15L from angels and unlock ₹10L from TANSEED with zero dilution."',
+      'Having committed angel terms dramatically accelerates TANSEED jury approval because it de-risks private market viability.',
+      'Disbursal is 100% non-dilutive and comes with the StartupTN Smart Card, unlocking ₹5L+ in free enterprise tool credits.'
+    ],
+    realWorldExample: 'A deeptech robotics startup in Chennai closed ₹20L from angel investors and secured a ₹10L TANSEED grant, giving them ₹30L total runway while preserving an extra 6% founder equity.',
+    legalComplianceRule: 'Company must maintain its registered office in Tamil Nadu for a minimum of 3 years post-sanction.',
+    estimatedFinancialGain: '₹10 Lakhs to ₹15 Lakhs 100% equity-free cash + ₹5L software credits',
+    applicableStates: ['Tamil Nadu']
+  },
+  {
+    id: 'kerala-ksum-zero-collateral-scaleup',
+    title: 'The Kerala KSUM Zero-Collateral Scale-Up Soft Capital Hack',
+    category: 'Debt & Working Capital',
+    oneLiner: 'How to secure ₹15 Lakhs in soft loans at minimal interest without pledging personal real-estate or pledging founder shares.',
+    thePlaybook: [
+      'Register on the Kerala Startup Mission (KSUM) portal and establish a registered office or branch in Kochi/Trivandrum.',
+      'Apply under the KSUM Early Stage Scale-Up Scheme.',
+      'The government advances up to ₹15 Lakhs as a soft working capital loan at subsidized interest rates.',
+      'Zero personal immovable property collateral is demanded; sanction is backed by state credit guarantees and project milestone reviews.',
+      'Repayment begins after a 12-month moratorium period, giving you a full year of breathing room to scale sales.'
+    ],
+    realWorldExample: 'A medical IoT startup in Ernakulam utilized a ₹15L KSUM soft loan to manufacture their first batch of 500 monitoring devices, paying off the loan purely from hospital pilot revenues.',
+    legalComplianceRule: 'All promoter directors must have a credit score above 650 and no willful default history on commercial loans.',
+    estimatedFinancialGain: '₹15 Lakhs soft capital with zero equity dilution and zero real-estate collateral',
+    applicableStates: ['Kerala']
+  },
+  {
+    id: 't-works-semiconductor-prototyping-arbitrage',
+    title: 'The T-Works / STPI Free Hardware & SMT Prototyping Arbitrage',
+    category: 'Hardware & Infrastructure',
+    oneLiner: 'How IoT, hardware, and EV startups access ₹10Cr+ semiconductor, PCB assembly, and laser-cutting industrial machinery for ₹0.',
+    thePlaybook: [
+      'Never invest your early angel checks into buying costly 3D printers, CNC milling machines, or Pick-and-Place PCB assembly lines.',
+      'Register on the Telangana T-Works portal (Hyderabad) or your local STPI FabLab.',
+      'DPIIT and state-recognized startups receive 80% to 100% subsidized machine time and technician operator support.',
+      'Fabricate your multi-layer PCB boards, CNC metal enclosures, and rapid 3D prototypes in hours instead of waiting weeks for China shipments.',
+      'Present your physical working prototype to receive MeitY TIDE 2.0 or BIRAC grants.'
+    ],
+    realWorldExample: 'An EV battery management startup in Hyderabad fabricated 12 prototype PCB boards and battery enclosures at T-Works for under ₹15,000, saving over ₹8 Lakhs in vendor machining costs.',
+    legalComplianceRule: 'Prototypes must be for genuine R&D and pilot validation, not commercial mass manufacturing.',
+    estimatedFinancialGain: 'Save ₹5L to ₹20L in specialized CNC/PCB prototyping capital expenditure',
+    applicableStates: ['Telangana', 'All States / Central']
+  },
+  {
+    id: 'gem-tender-exemption-arbitrage',
+    title: 'The GeM GFR-173 Prior Experience & EMD Waiver Arbitrage',
+    category: 'Government Contracts & Revenue',
+    oneLiner: 'How Day 1 DPIIT startups win multi-crore public sector and PSU tenders by invoking statutory exemptions from prior turnover rules.',
+    thePlaybook: [
+      'Central ministries and PSUs spend thousands of crores annually on software, cybersecurity, and office automation.',
+      'Ordinarily, tenders demand "minimum 3 years in business and ₹5 Crore annual turnover" — disqualifying young companies.',
+      'Under Rule 173(i) of General Financial Rules (GFR), all central government departments are mandated to waive "Prior Turnover" and "Prior Experience" for DPIIT startups.',
+      'Link your DPIIT number on the Government e-Marketplace (GeM) Startup Runway.',
+      'Submit bids without depositing Earnest Money Deposit (EMD is also 100% exempt). Compete purely on technical spec score and competitive price.'
+    ],
+    realWorldExample: 'A 9-month-old AI document processing startup won an ₹85 Lakhs contract with a national PSU bank, cleanly beating legacy IT giants by citing their DPIIT GFR 173(i) exemption.',
+    legalComplianceRule: 'Startup must meet the exact technical compliance standards specified in the tender scope of work.',
+    estimatedFinancialGain: 'Immediate access to ₹10L–₹2Cr government contracts without 3 years of prior audited history',
+    applicableStates: ['All States / Central']
   }
 ];

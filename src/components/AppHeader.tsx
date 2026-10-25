@@ -56,7 +56,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
           </NavLink>
 
           <NavLink
-            to="/calculator"
+            to="/tools"
             className={({ isActive }) =>
               `px-3 py-1.5 rounded-md transition-colors ${
                 isActive
@@ -65,7 +65,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               }`
             }
           >
-            Runway
+            Tools
           </NavLink>
 
           {onOpenFilterDrawer && (
