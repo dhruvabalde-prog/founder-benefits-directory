@@ -39,7 +39,7 @@ export const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#070a12] text-slate-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif] selection:bg-indigo-500/30 selection:text-indigo-200">
+      <div className="min-h-screen bg-[#fdfdfc] text-stone-900 flex flex-col font-sans selection:bg-[#274e37]/15 selection:text-[#274e37]">
         {/* Sticky App Header */}
         <AppHeader savedCount={bookmarkedIds.length} />
 
@@ -81,18 +81,22 @@ export const App: React.FC = () => {
         </main>
 
         {/* Minimal Footer */}
-        <footer className="border-t border-slate-900 bg-[#070a12] py-6 text-xs font-mono text-slate-500">
-          <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
-            <span>FounderPerks • High-Signal Founder Playbook</span>
-            <a
-              href="https://github.com/dhruvabalde-prog/founder-benefits-directory"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white flex items-center space-x-1 transition-colors"
-            >
-              <span>GitHub</span>
-              <ArrowUpRight className="w-3 h-3" />
-            </a>
+        <footer className="border-t border-stone-200/80 bg-[#fdfdfc] py-8 text-xs text-stone-500">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <span className="font-serif text-stone-600">FounderPerks • Editorial directory for Indian founders</span>
+            <div className="flex items-center space-x-4 font-mono text-[11px]">
+              <a
+                href="https://github.com/dhruvabalde-prog/founder-benefits-directory"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-600 hover:text-[#274e37] flex items-center space-x-1 transition-colors"
+              >
+                <span>GitHub Source</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+              <span className="text-stone-300">•</span>
+              <span className="text-stone-400">Zero Auth • 100% Free</span>
+            </div>
           </div>
         </footer>
       </div>

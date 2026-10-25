@@ -4,25 +4,30 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100;
+    @apply bg-[#fdfdfc] text-[#1c1917];
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif tracking-tight text-[#1c1917];
   }
 }
 
-/* Custom scrollbar */
+/* Custom subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+  background: #e7e5e4;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #d6d3d1;
 }
