@@ -1,12 +1,12 @@
 {
-  "short_name": "FounderPerks",
-  "name": "FounderPerks: Founder Schemes & Perks SuperApp",
-  "description": "Comprehensive directory of Government schemes, banking suites, and $350k+ cloud credits for startup founders.",
+  "short_name": "Artha",
+  "name": "Artha: The Founder Advantage",
+  "description": "Tactical directory of Indian central & state government schemes, founder banking, and startup credits.",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "theme_color": "#030712",
-  "background_color": "#030712",
+  "theme_color": "#fdfdfc",
+  "background_color": "#fdfdfc",
   "icons": [
     {
       "src": "/icon-192.png",

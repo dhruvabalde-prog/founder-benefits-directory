@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppHeader } from './components/AppHeader';
+import { AppBottomNav } from './components/AppBottomNav';
 import { HomePage } from './pages/HomePage';
 import { DetailPage } from './pages/DetailPage';
 import { HacksPage } from './pages/HacksPage';
 import { CalculatorPage } from './pages/CalculatorPage';
 import { SavedPage } from './pages/SavedPage';
 import { ArrowUpRight } from 'lucide-react';
+import { FilterState } from './components/MyntraFilterDrawer';
 
 export const App: React.FC = () => {
-  // Bookmarks stored in local storage
   const [bookmarkedIds, setBookmarkedIds] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem('founder_master_saved');
@@ -18,6 +19,20 @@ export const App: React.FC = () => {
       return ['istart-rajasthan', 'microsoft-founders-hub', 'sisfs-central'];
     }
   });
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filters, setFilters] = useState<FilterState>({
+    categories: [],
+    states: [],
+    stages: [],
+    sectors: []
+  });
+
+  const activeFilterCount =
+    filters.categories.length +
+    filters.states.length +
+    filters.stages.length +
+    filters.sectors.length;
 
   useEffect(() => {
     try {
@@ -41,12 +56,28 @@ export const App: React.FC = () => {
     <BrowserRouter>
       <div className="min-h-screen bg-[#fdfdfc] text-stone-900 flex flex-col font-sans selection:bg-[#274e37]/15 selection:text-[#274e37]">
         {/* Sticky App Header */}
-        <AppHeader savedCount={bookmarkedIds.length} />
+        <AppHeader 
+          savedCount={bookmarkedIds.length} 
+          onOpenFilterDrawer={() => setIsFilterOpen(true)}
+          activeFilterCount={activeFilterCount}
+        />
 
-        {/* Multipage Routing Viewport (max-w-4xl, centered, ultra-clean) */}
-        <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+        {/* Viewport content */}
+        <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <Routes>
-            <Route path="/" element={<HomePage bookmarkedIds={bookmarkedIds} />} />
+            <Route 
+              path="/" 
+              element={
+                <HomePage 
+                  bookmarkedIds={bookmarkedIds} 
+                  onToggleBookmark={toggleBookmark}
+                  isFilterOpen={isFilterOpen}
+                  setIsFilterOpen={setIsFilterOpen}
+                  filters={filters}
+                  setFilters={setFilters}
+                />
+              } 
+            />
             <Route
               path="/benefit/:slug"
               element={
@@ -80,22 +111,28 @@ export const App: React.FC = () => {
           </Routes>
         </main>
 
-        {/* Minimal Footer */}
-        <footer className="border-t border-stone-200/80 bg-[#fdfdfc] py-8 text-xs text-stone-500">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
-            <span className="font-serif text-stone-600">FounderPerks • Editorial directory for Indian founders</span>
+        {/* Mobile First Bottom Navigation Bar */}
+        <AppBottomNav
+          savedCount={bookmarkedIds.length}
+          activeFilterCount={activeFilterCount}
+          onOpenFilterDrawer={() => setIsFilterOpen(true)}
+        />
+
+        {/* Desktop Footer */}
+        <footer className="hidden sm:block border-t border-stone-200/80 bg-[#fdfdfc] py-6 text-xs text-stone-500">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+            <span className="font-serif text-stone-600">Artha</span>
             <div className="flex items-center space-x-4 font-mono text-[11px]">
               <a
                 href="https://github.com/dhruvabalde-prog/founder-benefits-directory"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-stone-600 hover:text-[#274e37] flex items-center space-x-1 transition-colors"
+                aria-label="GitHub Source"
               >
-                <span>GitHub Source</span>
+                <span>GitHub</span>
                 <ArrowUpRight className="w-3 h-3" />
               </a>
-              <span className="text-stone-300">•</span>
-              <span className="text-stone-400">Zero Auth • 100% Free</span>
             </div>
           </div>
         </footer>

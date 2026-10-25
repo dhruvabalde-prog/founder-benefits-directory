@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Trash2, ArrowRight, Bookmark } from 'lucide-react';
+import { Trash2, ArrowRight, ArrowLeft, Bookmark } from 'lucide-react';
 import { MASTER_CATALOG, MasterItem } from '../data/masterCatalog';
 
 interface SavedPageProps {
@@ -18,24 +18,22 @@ export const SavedPage: React.FC<SavedPageProps> = ({
   );
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-150">
-      <div className="flex items-center justify-between pb-3 border-b border-stone-200">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-900 tracking-tight">
-            Saved Programs ({savedItems.length})
-          </h1>
-          <p className="text-xs font-mono text-stone-500">
-            Stored locally in your browser for offline reference.
-          </p>
-        </div>
+    <div className="space-y-4 animate-in fade-in duration-150 pb-20 sm:pb-8">
+      {/* Header */}
+      <div className="flex items-center justify-between pb-2 border-b border-stone-200">
+        <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-900 tracking-tight">
+          Saved ({savedItems.length})
+        </h1>
 
         {savedItems.length > 0 && (
           <button
+            type="button"
             onClick={onClearAll}
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-rose-700 hover:bg-rose-50 border border-rose-200 transition-colors"
+            className="p-2 rounded-lg text-rose-700 hover:bg-rose-50 border border-rose-200 transition-colors"
+            aria-label="Clear All"
+            title="Clear All"
           >
-            <Trash2 className="w-3.5 h-3.5" />
-            <span>Clear All</span>
+            <Trash2 className="w-4 h-4" />
           </button>
         )}
       </div>
@@ -43,16 +41,13 @@ export const SavedPage: React.FC<SavedPageProps> = ({
       {savedItems.length === 0 ? (
         <div className="text-center py-16 bg-white rounded-xl border border-dashed border-stone-300 p-6 space-y-3">
           <Bookmark className="w-8 h-8 text-stone-400 mx-auto" />
-          <div className="text-base font-serif font-bold text-stone-800">No programs saved yet</div>
-          <p className="text-xs text-stone-500 font-sans max-w-sm mx-auto">
-            Click 'Save' on any dedicated scheme or grant page to pin it to your personal shortlist.
-          </p>
+          <div className="text-sm font-serif font-bold text-stone-700">Empty</div>
           <Link
             to="/"
-            className="inline-flex items-center space-x-1.5 px-4 py-2 bg-[#274e37] text-white rounded-md text-xs font-medium font-sans mt-2"
+            className="p-3 bg-[#274e37] text-white rounded-lg inline-flex items-center justify-center"
+            aria-label="Browse"
           >
-            <span>Browse Catalog</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowLeft className="w-4 h-4" />
           </Link>
         </div>
       ) : (
@@ -61,7 +56,7 @@ export const SavedPage: React.FC<SavedPageProps> = ({
             <Link
               key={item.id}
               to={`/benefit/${item.slug}`}
-              className="group block bg-white hover:bg-[#fafaf8] border border-stone-200 hover:border-stone-400 rounded-xl p-5 transition-all shadow-xs"
+              className="group block bg-white hover:bg-[#fafaf8] border border-stone-200 hover:border-stone-400 rounded-xl p-4 transition-all shadow-xs"
             >
               <div className="flex items-center justify-between text-xs mb-1">
                 <span className="font-mono text-[10px] text-[#274e37] font-semibold uppercase bg-[#f2f7f4] px-2 py-0.5 rounded border border-[#cce2d5]">
@@ -79,11 +74,10 @@ export const SavedPage: React.FC<SavedPageProps> = ({
                 {item.whyFoundersCare}
               </p>
 
-              <div className="mt-2.5 pt-2 border-t border-stone-100 flex items-center justify-between text-xs font-mono">
-                <span className="text-[11px] text-stone-500">{item.provider}</span>
-                <span className="text-[#274e37] font-semibold flex items-center space-x-1">
-                  <span>View Details</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+              <div className="mt-2 pt-2 border-t border-stone-100 flex items-center justify-between text-xs font-mono">
+                <span className="text-[11px] text-stone-400">{item.provider}</span>
+                <span className="p-1.5 rounded-md bg-stone-100 group-hover:bg-[#274e37] group-hover:text-white transition-colors">
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </div>
             </Link>
