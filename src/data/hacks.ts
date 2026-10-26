@@ -201,5 +201,56 @@ export const FOUNDER_HACKS: FounderHack[] = [
     legalComplianceRule: 'Startup must meet the exact technical compliance standards specified in the tender scope of work.',
     estimatedFinancialGain: 'Immediate access to ₹10L–₹2Cr government contracts without 3 years of prior audited history',
     applicableStates: ['All States / Central']
+  },
+  {
+    id: 'women-founder-51-equity-multiplier',
+    title: 'The 51% Woman Co-Founder / Wife Equity Multiplier',
+    category: 'Gender & Equity Arbitrage',
+    oneLiner: 'How structuring 51%+ controlling equity with a woman partner unlocks ₹1 Crore collateral-free debt, 35% cash subsidies, state monthly bonuses, and 3% public procurement quotas.',
+    thePlaybook: [
+      'Incorporate your entity (Pvt Ltd, LLP, or Partnership) with a qualified woman co-founder or spouse holding at least 51% of paid-up equity and active executive directorship.',
+      'Apply to Stand-Up India to access between ₹10 Lakhs and ₹1 Crore in low-interest, collateral-free bank loans reserved for women-led greenfield ventures.',
+      'Under PMEGP, women qualify for the highest "Special Category" non-repayable capital subsidy of up to 35% (compared to 15% for general males).',
+      'Claim higher monthly sustenance allowances across state startup policies: +₹5,000/mo extra in Rajasthan & Gujarat, +₹2,000/mo extra in Odisha, and +20% bonus in Madhya Pradesh.',
+      'Under the Public Procurement Policy, central ministries and PSUs have a mandatory 3% annual procurement quota reserved strictly for women-owned MSMEs on GeM.'
+    ],
+    realWorldExample: 'A logistics software company structured with 51% ownership held by a qualified woman director unlocked a ₹35L Stand-Up India facility, ₹25,000/mo iStart living stipend, and won an ongoing PSU supply chain digitization contract on GeM with zero bidding fee.',
+    legalComplianceRule: 'To prevent Section 64(1)(ii) clubbing of salary into the husband\'s tax return, ensure the spouse possesses professional/technical qualifications (e.g. MBA, engineering, commerce) commensurate with her designated corporate duties.',
+    estimatedFinancialGain: '₹10L–₹1Cr collateral-free capital + up to 35% non-repayable grant + ₹3L/yr living cash',
+    applicableStates: ['All States / Central', 'Rajasthan', 'Gujarat', 'Odisha', 'Telangana']
+  },
+  {
+    id: 'senior-citizen-parent-rent-advisory-arbitrage',
+    title: 'The Senior Citizen Parent Rent & Advisory Arbitrage',
+    category: 'Family Tax Planning',
+    oneLiner: 'How paying legitimate rent and advisory retainer to senior citizen parents shifts profits into low/zero tax brackets while generating corporate tax deductions.',
+    thePlaybook: [
+      'If your senior citizen parents (aged 60+ or 80+) own the residential or commercial property from which your startup operates, execute a formal registered rental lease agreement.',
+      'The company claims 100% of the rent paid as a tax-deductible business expense under Section 37(1), directly reducing corporate taxable profits.',
+      'In the parents\' hands, rental income is taxed under "Income from House Property," which automatically enjoys a statutory 30% standard deduction under Section 24(a).',
+      'Senior citizens benefit from higher basic exemption limits (₹3 Lakhs for 60+, ₹5 Lakhs for 80+), absorbing the income with minimal to zero tax liability.',
+      'If parents have business/financial expertise, retain them on a formal advisory board for professional consultancy fees, fully deductible as business overheads.'
+    ],
+    realWorldExample: 'A profitable bootstrapped SaaS founder operating from a family property paid ₹6 Lakhs annual rent to their retired father. The startup saved ₹1.5 Lakhs in corporate tax (25%), while the father utilized the 30% Section 24 deduction and senior citizen rebate, paying under ₹15,000 in personal tax.',
+    legalComplianceRule: 'Rent must be paid at fair market value (FMV) via direct bank transfers, with property municipal tax receipts and rent receipts maintained for audit trail.',
+    estimatedFinancialGain: 'Saves 20% to 25% corporate tax on rental pool (saves ₹1L to ₹3L annually)',
+    applicableStates: ['All States / Central']
+  },
+  {
+    id: 'car-depreciation-operational-expense-shield',
+    title: 'The 15% Vehicle Depreciation & Fuel Shield',
+    category: 'Asset Tax Shields',
+    oneLiner: 'How purchasing company transport in the entity name generates an immediate 15% annual written-down tax write-off plus 100% fuel, insurance, and toll deductions.',
+    thePlaybook: [
+      'Register business vehicles (including cars used by founders for client meetings, bank runs, and team travel) in the name of the Private Limited company or LLP.',
+      'Claim standard 15% annual depreciation on the vehicle\'s Written Down Value (WDV) to reduce taxable corporate net profits (or 7.5% if used for under 180 days in Year 1).',
+      'All vehicle operational expenses—petrol/diesel bills, Fastag highway tolls, comprehensive insurance, regular maintenance servicing, and driver salaries—are 100% tax-deductible business expenses.',
+      'Maintain an official company vehicle logbook recording date, destination, odometer reading, and business purpose of trips.',
+      'If EV (Electric Vehicle): Check state EV policies (e.g. Delhi, Maharashtra, Karnataka) for 100% road tax and registration fee waivers + fast charging subsidies.'
+    ],
+    realWorldExample: 'A bootstrapped tech firm purchased an ₹18 Lakhs vehicle in the company name. In Year 1, they claimed ₹2.7 Lakhs in depreciation write-offs plus ₹1.8 Lakhs in fuel, insurance, and maintenance expenses, reducing taxable income by ₹4.5 Lakhs and saving over ₹1.1 Lakhs in corporate tax.',
+    legalComplianceRule: 'Keep a clean vehicle logbook and fuel credit card receipts to prevent assessing officers from disallowing a portion of costs under Section 38(2) for personal usage.',
+    estimatedFinancialGain: '15% annual depreciation write-off + ₹1L to ₹2L/year in tax-shielded running expenses',
+    applicableStates: ['All States / Central']
   }
 ];

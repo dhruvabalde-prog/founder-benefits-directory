@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { Bookmark, Sparkles, Lightbulb, SlidersHorizontal } from 'lucide-react';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Bookmark, ChevronDown, SlidersHorizontal, Sparkles } from 'lucide-react';
 
 interface AppHeaderProps {
   savedCount: number;
@@ -13,18 +13,52 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   onOpenFilterDrawer,
   activeFilterCount = 0 
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Detect current active main dimension
+  const getCurrentDimension = () => {
+    if (location.pathname.startsWith('/learning')) return 'learning';
+    if (location.pathname.startsWith('/networking')) return 'networking';
+    return 'benefits';
+  };
+
+  const handleDimensionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const val = e.target.value;
+    if (val === 'benefits') navigate('/');
+    if (val === 'learning') navigate('/learning');
+    if (val === 'networking') navigate('/networking');
+  };
+
   return (
     <header className="sticky top-0 z-30 bg-[#fdfdfc]/95 backdrop-blur-md border-b border-stone-200/80 transition-colors">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
-        {/* Brand Mark: Artha */}
-        <Link to="/" className="flex items-center space-x-2.5 group select-none">
-          <div className="w-8 h-8 rounded-lg bg-[#274e37] text-white flex items-center justify-center font-serif font-bold text-base shadow-xs group-hover:bg-[#1c3827] transition-colors">
-            अ
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-3">
+        {/* Brand Mark + Dimension Dropdown */}
+        <div className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-2 group select-none">
+            <div className="w-8 h-8 rounded-lg bg-[#274e37] text-white flex items-center justify-center font-serif font-bold text-base shadow-xs group-hover:bg-[#1c3827] transition-colors">
+              अ
+            </div>
+            <span className="font-serif font-bold text-lg text-stone-900 tracking-tight hidden xs:inline">
+              Artha
+            </span>
+          </Link>
+
+          {/* Single-Word Dimension Dropdown Switcher */}
+          <div className="relative">
+            <select
+              value={getCurrentDimension()}
+              onChange={handleDimensionChange}
+              className="pl-2.5 pr-7 py-1.5 bg-[#f2f7f4] border border-[#cce2d5] text-[#274e37] rounded-lg text-xs font-serif font-bold tracking-tight appearance-none cursor-pointer focus:outline-none focus:border-[#274e37]"
+              aria-label="Section Selector"
+            >
+              <option value="benefits">Benefits</option>
+              <option value="learning">Learning</option>
+              <option value="networking">Networking</option>
+            </select>
+            <ChevronDown className="w-3.5 h-3.5 text-[#274e37] absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
-          <div className="font-serif font-bold text-lg sm:text-xl text-stone-900 tracking-tight leading-none group-hover:text-[#274e37] transition-colors">
-            Artha
-          </div>
-        </Link>
+        </div>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden sm:flex items-center space-x-1.5 text-xs font-serif font-medium">

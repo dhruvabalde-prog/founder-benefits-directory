@@ -6,6 +6,8 @@ import { HomePage } from './pages/HomePage';
 import { DetailPage } from './pages/DetailPage';
 import { HacksPage } from './pages/HacksPage';
 import { ToolsPage } from './pages/ToolsPage';
+import { LearningPage } from './pages/LearningPage';
+import { NetworkingPage } from './pages/NetworkingPage';
 import { SavedPage } from './pages/SavedPage';
 import { ArrowUpRight } from 'lucide-react';
 import { FilterState } from './components/MyntraFilterDrawer';
@@ -90,6 +92,8 @@ export const App: React.FC = () => {
               }
             />
             <Route path="/hacks" element={<HacksPage />} />
+            <Route path="/learning" element={<LearningPage />} />
+            <Route path="/networking" element={<NetworkingPage />} />
             <Route
               path="/tools"
               element={
