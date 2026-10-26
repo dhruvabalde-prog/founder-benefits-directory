@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Bookmark, SlidersHorizontal } from 'lucide-react';
+import { Bookmark, SlidersHorizontal, ArrowLeft } from 'lucide-react';
 
 interface AppHeaderProps {
   savedCount: number;
@@ -15,23 +15,41 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 }) => {
   const location = useLocation();
 
-  const getCurrentTitle = () => {
-    if (location.pathname.startsWith('/learning')) return 'Learning';
-    if (location.pathname.startsWith('/networking')) return 'Networking';
-    if (location.pathname.startsWith('/hacks')) return 'Playbooks';
-    if (location.pathname.startsWith('/tools')) return 'Tools';
-    if (location.pathname.startsWith('/saved')) return 'Saved';
+  const isBenefitsRoot = location.pathname === '/';
+  const isLearning = location.pathname.startsWith('/learning');
+  const isNetworking = location.pathname.startsWith('/networking');
+  const isHacks = location.pathname.startsWith('/hacks');
+  const isTools = location.pathname.startsWith('/tools');
+  const isSaved = location.pathname.startsWith('/saved');
+  const isDetail = location.pathname.startsWith('/benefit/');
+
+  const getCurrentSectionTitle = () => {
+    if (isLearning) return 'Learning';
+    if (isNetworking) return 'Networking';
+    if (isHacks) return 'Playbooks';
+    if (isTools) return 'Tools';
+    if (isSaved) return 'Saved';
+    if (isDetail) return 'Blueprint';
     return 'Benefits';
   };
-
-  const isBenefitsPage = location.pathname === '/';
 
   return (
     <header className="sticky top-0 z-30 bg-[#fdfdfc]/98 backdrop-blur-md border-b border-stone-200/80 transition-colors">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-3">
-        {/* Brand Mark + Active Hub Heading */}
-        <div className="flex items-center space-x-3">
-          <Link to="/" className="flex items-center space-x-2.5 group select-none">
+        {/* Brand & Section Indicator */}
+        <div className="flex items-center space-x-2.5">
+          {(isLearning || isNetworking || isDetail) && (
+            <Link
+              to="/"
+              className="p-1.5 -ml-1 text-stone-500 hover:text-stone-900 rounded-lg hover:bg-stone-100 transition-colors"
+              aria-label="Back to Benefits"
+              title="Back to Benefits"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+          )}
+
+          <Link to="/" className="flex items-center space-x-2 group select-none">
             <div className="w-8 h-8 rounded-lg bg-[#274e37] text-white flex items-center justify-center font-serif font-bold text-base shadow-xs group-hover:bg-[#1c3827] transition-colors">
               अ
             </div>
@@ -42,24 +60,80 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
           <span className="text-stone-300 font-mono text-xs">/</span>
 
-          {/* Clean Single-Word Active Hub Display */}
-          <span className="font-serif font-bold text-sm text-[#274e37] bg-[#f2f7f4] px-2.5 py-0.5 rounded-md border border-[#cce2d5]">
-            {getCurrentTitle()}
+          {/* Section Indicator */}
+          <span className="font-serif font-bold text-xs sm:text-sm text-[#274e37] bg-[#f2f7f4] px-2.5 py-0.5 rounded-md border border-[#cce2d5]">
+            {getCurrentSectionTitle()}
           </span>
         </div>
 
-        {/* Right Actions: Filter trigger (on benefits) + Saved Bookmarks */}
+        {/* Desktop Quick Links */}
+        <nav className="hidden sm:flex items-center space-x-2 text-xs font-serif font-medium">
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `px-2.5 py-1 rounded-md transition-colors ${
+                isActive ? 'text-[#274e37] bg-[#f2f7f4] font-bold' : 'text-stone-600 hover:text-stone-900'
+              }`
+            }
+          >
+            Schemes
+          </NavLink>
+          <NavLink
+            to="/hacks"
+            className={({ isActive }) =>
+              `px-2.5 py-1 rounded-md transition-colors ${
+                isActive ? 'text-[#274e37] bg-[#f2f7f4] font-bold' : 'text-stone-600 hover:text-stone-900'
+              }`
+            }
+          >
+            Playbooks
+          </NavLink>
+          <NavLink
+            to="/tools"
+            className={({ isActive }) =>
+              `px-2.5 py-1 rounded-md transition-colors ${
+                isActive ? 'text-[#274e37] bg-[#f2f7f4] font-bold' : 'text-stone-600 hover:text-stone-900'
+              }`
+            }
+          >
+            Tools
+          </NavLink>
+          <span className="text-stone-300">|</span>
+          <NavLink
+            to="/learning"
+            className={({ isActive }) =>
+              `px-2.5 py-1 rounded-md transition-colors ${
+                isActive ? 'text-[#274e37] bg-[#f2f7f4] font-bold' : 'text-stone-600 hover:text-stone-900'
+              }`
+            }
+          >
+            Learning
+          </NavLink>
+          <NavLink
+            to="/networking"
+            className={({ isActive }) =>
+              `px-2.5 py-1 rounded-md transition-colors ${
+                isActive ? 'text-[#274e37] bg-[#f2f7f4] font-bold' : 'text-stone-600 hover:text-stone-900'
+              }`
+            }
+          >
+            Networking
+          </NavLink>
+        </nav>
+
+        {/* Right Actions: Filter trigger + Saved Bookmarks */}
         <div className="flex items-center space-x-1.5">
-          {isBenefitsPage && onOpenFilterDrawer && (
+          {isBenefitsRoot && onOpenFilterDrawer && (
             <button
               type="button"
               onClick={onOpenFilterDrawer}
               className={`p-2 rounded-lg border transition-colors flex items-center space-x-1.5 font-sans text-xs ${
                 activeFilterCount > 0
                   ? 'bg-[#f2f7f4] border-[#cce2d5] text-[#274e37]'
-                  : 'border-stone-200 text-stone-700 hover:bg-stone-100/80'
+                  : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
               }`}
-              aria-label="Filter"
+              aria-label="Open Filters"
             >
               <SlidersHorizontal className="w-4 h-4" />
               {activeFilterCount > 0 && (
