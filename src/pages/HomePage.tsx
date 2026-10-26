@@ -11,14 +11,12 @@ import {
   ChevronDown, 
   ChevronUp,
   CheckCircle2,
-  AlertTriangle,
-  Sparkles
+  AlertTriangle
 } from 'lucide-react';
-import { MASTER_CATALOG, MasterItem } from '../data/masterCatalog';
+import { MASTER_CATALOG } from '../data/masterCatalog';
 import { FilterState, MyntraFilterDrawer } from '../components/MyntraFilterDrawer';
 import { QuickPersonaPresets, PersonaPresetId } from '../components/QuickPersonaPresets';
 import { GlobalContextBar } from '../components/GlobalContextBar';
-import { DepartmentToolsMatrix } from '../components/DepartmentToolsMatrix';
 
 interface HomePageProps {
   bookmarkedIds: string[];
@@ -45,11 +43,8 @@ export const HomePage: React.FC<HomePageProps> = ({
   const [selectedState, setSelectedState] = useState<string>('all');
   const [selectedEntity, setSelectedEntity] = useState<string>('all');
   const [benefitCategory, setBenefitCategory] = useState<string>('all');
-  const [showToolsMatrix, setShowToolsMatrix] = useState<boolean>(false);
 
-  const toggleExpand = (id: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const toggleExpand = (id: string) => {
     setExpandedItemId((prev) => (prev === id ? null : id));
   };
 
@@ -131,12 +126,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         if (!matchesAnyState) return false;
       }
 
-      // 4. Stage Filter
-      if (filters.stages.length > 0) {
-        // loose matching on stages
-      }
-
-      // 5. Search query
+      // 4. Search query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matchesTitle = item.title.toLowerCase().includes(q);
@@ -153,66 +143,38 @@ export const HomePage: React.FC<HomePageProps> = ({
     });
   }, [filters, searchQuery]);
 
-  const activeFilterCount =
-    filters.categories.length +
-    filters.states.length +
-    filters.stages.length +
-    filters.sectors.length +
-    (filters.entities ? filters.entities.length : 0);
-
   return (
-    <div className="space-y-4 sm:space-y-5 animate-in fade-in duration-150 pb-20 sm:pb-8">
-      {/* 1. Quick Search Bar & Full Filter Drawer Button */}
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-          <input
-            type="text"
-            placeholder="Search programs, states, compute or grants..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-9 py-2.5 bg-white border border-stone-200 rounded-xl text-stone-900 placeholder-stone-400 text-xs sm:text-sm focus:outline-none focus:border-stone-400 shadow-xs transition-colors font-sans"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-stone-400 hover:text-stone-700"
-              aria-label="Clear Search"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          )}
-        </div>
-
-        {/* Myntra-style Filter Trigger Button */}
-        <button
-          type="button"
-          onClick={() => setIsFilterOpen(true)}
-          className={`p-2.5 sm:px-3 sm:py-2.5 rounded-xl border flex items-center justify-center space-x-1.5 transition-colors shadow-xs shrink-0 ${
-            activeFilterCount > 0
-              ? 'bg-[#f2f7f4] border-[#cce2d5] text-[#274e37]'
-              : 'bg-white border-stone-200 text-stone-700 hover:border-stone-300'
-          }`}
-          aria-label="Open Filters"
-        >
-          <SlidersHorizontal className="w-4 h-4" />
-          {activeFilterCount > 0 && (
-            <span className="w-4 h-4 rounded-full bg-[#274e37] text-white font-mono text-[10px] font-bold flex items-center justify-center">
-              {activeFilterCount}
-            </span>
-          )}
-        </button>
+    <div className="space-y-3 sm:space-y-4 animate-in fade-in duration-150 pb-24 sm:pb-12">
+      {/* Search Input */}
+      <div className="relative">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+        <input
+          type="text"
+          placeholder="Search by grant name, compute credits, or state..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full pl-10 pr-9 py-2.5 bg-white border border-stone-200 rounded-xl text-stone-900 placeholder-stone-400 text-xs sm:text-sm focus:outline-none focus:border-stone-400 shadow-xs transition-colors font-sans"
+        />
+        {searchQuery && (
+          <button
+            type="button"
+            onClick={() => setSearchQuery('')}
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-stone-400 hover:text-stone-700"
+            aria-label="Clear Search"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        )}
       </div>
 
-      {/* 2. One-Tap Quick Persona Presets */}
+      {/* 1-Tap Quick Persona Presets */}
       <QuickPersonaPresets
         activePreset={activePreset}
         onSelectPreset={handleSelectPreset}
         onClearPreset={handleClearPreset}
       />
 
-      {/* 3. Global Context Bar (State + Legal Entity + Category Tabs) */}
+      {/* Global Context Bar (State + Entity + Category) */}
       <GlobalContextBar
         selectedState={selectedState}
         onSelectState={handleStateChange}
@@ -222,67 +184,32 @@ export const HomePage: React.FC<HomePageProps> = ({
         onSelectCategory={handleCategoryChange}
       />
 
-      {/* 4. Zero-Burn Tools Banner / Matrix Toggle */}
-      <div className="bg-[#fcfbf9] border border-stone-200/90 rounded-xl p-3 flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <div className="w-7 h-7 rounded-lg bg-[#274e37]/10 text-[#274e37] flex items-center justify-center">
-            <Sparkles className="w-3.5 h-3.5 text-[#274e37]" />
-          </div>
-          <div>
-            <div className="font-serif font-bold text-xs text-stone-900">
-              Departmental Zero-Burn Stack
-            </div>
-            <div className="text-[10px] text-stone-500 font-sans">
-              Free lifetime database, cold email leads, zero-balance banking
-            </div>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setShowToolsMatrix(!showToolsMatrix)}
-          className="px-2.5 py-1.5 rounded-lg bg-[#274e37] text-white text-[11px] font-serif font-medium hover:bg-[#1c3827] transition-colors shrink-0"
-        >
-          {showToolsMatrix ? 'Hide Stack' : 'View Stack'}
-        </button>
-      </div>
-
-      {/* Render Departmental Stack Matrix if toggled */}
-      {showToolsMatrix && (
-        <div className="animate-in fade-in duration-150">
-          <DepartmentToolsMatrix />
-        </div>
-      )}
-
-      {/* 5. Master Items Counter & Filter Reset */}
+      {/* Items Counter */}
       <div className="flex items-center justify-between text-xs font-mono text-stone-500 px-1 pt-1">
-        <span>{filteredItems.length} schemes & programs matching</span>
-        {activeFilterCount > 0 && (
+        <span>{filteredItems.length} schemes</span>
+        {(filters.categories.length > 0 || filters.states.length > 0 || filters.entities.length > 0 || activePreset) && (
           <button
             type="button"
             onClick={handleClearPreset}
             className="text-[11px] text-stone-500 hover:text-stone-900 underline"
           >
-            Clear all filters
+            Clear filters
           </button>
         )}
       </div>
 
-      {/* 6. Master List: Compact Tiles with Expandable Accordion */}
-      <div className="space-y-3">
+      {/* Master List: Long Rectangular Tiles Arranged Vertically (Header-First Clutter-Free) */}
+      <div className="space-y-2">
         {filteredItems.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-xl border border-dashed border-stone-300 p-6 space-y-3">
-            <div className="text-sm font-serif font-bold text-stone-700">No programs match this combination</div>
-            <p className="text-xs text-stone-500 max-w-sm mx-auto font-sans">
-              Try switching your state to "All States / Central" or clearing the entity filter to see universal central schemes.
-            </p>
+            <div className="text-sm font-serif font-bold text-stone-700">No programs match</div>
             <button
               type="button"
               onClick={handleClearPreset}
-              className="px-4 py-2 rounded-lg bg-[#274e37] text-white text-xs font-serif font-medium inline-flex items-center justify-center gap-1.5"
+              className="p-2 rounded-lg bg-[#274e37] text-white text-xs font-serif inline-flex items-center gap-1.5"
             >
               <X className="w-3.5 h-3.5" />
-              <span>Reset Filters</span>
+              <span>Reset</span>
             </button>
           </div>
         ) : (
@@ -293,127 +220,131 @@ export const HomePage: React.FC<HomePageProps> = ({
             return (
               <div
                 key={item.id}
-                className="bg-white border border-stone-200/90 hover:border-stone-400 rounded-xl transition-all shadow-xs overflow-hidden"
+                className="bg-white border border-stone-200 hover:border-stone-400 rounded-xl transition-all shadow-xs overflow-hidden"
               >
-                {/* Main Scannable Row */}
-                <div className="p-4 sm:p-5 space-y-2">
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="px-2 py-0.5 text-[10px] font-mono font-semibold rounded bg-[#f2f7f4] text-[#274e37] border border-[#cce2d5]">
+                {/* Long Rectangular Tile Header (Always Visible, Click to View Everything) */}
+                <button
+                  type="button"
+                  onClick={() => toggleExpand(item.id)}
+                  className="w-full p-3.5 sm:p-4 text-left flex items-center justify-between gap-3 hover:bg-stone-50/60 active:bg-stone-100/50 transition-colors"
+                >
+                  <div className="flex-1 min-w-0 pr-1">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <span className="px-2 py-0.5 text-[9px] sm:text-[10px] font-mono font-semibold rounded bg-[#f2f7f4] text-[#274e37] border border-[#cce2d5] shrink-0">
                         {item.badge}
                       </span>
-                      <span className="text-xs text-stone-500 font-sans truncate max-w-[140px] sm:max-w-none">
-                        {item.provider}
-                      </span>
                       {item.stateOrRegion && item.stateOrRegion !== 'All States / Central' && (
-                        <span className="text-[10px] font-mono text-stone-600 px-1.5 py-0.5 bg-stone-100 rounded border border-stone-200">
+                        <span className="text-[9px] sm:text-[10px] font-mono text-stone-600 px-1.5 py-0.5 bg-stone-100 rounded border border-stone-200 shrink-0">
                           {item.stateOrRegion}
                         </span>
                       )}
+                      <span className="text-xs font-mono font-bold text-[#274e37] shrink-0 ml-auto sm:ml-0">
+                        {item.valueAmount}
+                      </span>
                     </div>
 
-                    <div className="text-xs sm:text-sm font-mono font-bold text-[#274e37] whitespace-nowrap">
-                      {item.valueAmount}
-                    </div>
-                  </div>
-
-                  <Link to={`/benefit/${item.slug}`} className="block group">
-                    <h3 className="text-base sm:text-lg font-serif font-bold text-stone-900 group-hover:text-[#274e37] transition-colors tracking-tight">
+                    {/* Long Rectangular Title */}
+                    <div className="text-sm sm:text-base font-serif font-bold text-stone-900 leading-snug">
                       {item.title}
-                    </h3>
-                  </Link>
-
-                  <p className="text-xs sm:text-sm text-stone-600 line-clamp-2 leading-relaxed font-sans">
-                    {item.whyFoundersCare}
-                  </p>
-
-                  {/* Actions Bar: Icon-Only CTAs */}
-                  <div className="pt-2 flex items-center justify-between border-t border-stone-100">
-                    <button
-                      type="button"
-                      onClick={(e) => toggleExpand(item.id, e)}
-                      className="p-1.5 rounded-md hover:bg-stone-100 text-stone-500 transition-colors flex items-center space-x-1 text-xs font-mono"
-                      aria-label="Expand Preview"
-                      title="Quick Preview"
-                    >
-                      {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                    </button>
-
-                    <div className="flex items-center space-x-1.5">
-                      <button
-                        type="button"
-                        onClick={() => onToggleBookmark(item.id)}
-                        className={`p-2 rounded-lg transition-colors border ${
-                          isBookmarked
-                            ? 'bg-[#f2f7f4] border-[#cce2d5] text-[#274e37]'
-                            : 'bg-white border-stone-200 text-stone-500 hover:text-stone-900'
-                        }`}
-                        aria-label="Save program"
-                        title={isBookmarked ? 'Saved' : 'Save'}
-                      >
-                        {isBookmarked ? (
-                          <BookmarkCheck className="w-4 h-4 fill-[#274e37]" />
-                        ) : (
-                          <Bookmark className="w-4 h-4" />
-                        )}
-                      </button>
-
-                      <a
-                        href={item.officialLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors border border-stone-200"
-                        aria-label="Official Portal"
-                        title="Official Portal"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-
-                      <Link
-                        to={`/benefit/${item.slug}`}
-                        className="p-2 rounded-lg bg-[#274e37] hover:bg-[#1c3827] text-white transition-colors shadow-xs"
-                        aria-label="View Blueprint"
-                        title="View Full Blueprint"
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
                     </div>
                   </div>
-                </div>
 
-                {/* Expandable Tile Content (Ghar Expand) */}
+                  <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center shrink-0 text-stone-600 transition-transform">
+                    {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </div>
+                </button>
+
+                {/* Expanded View: Everything about the specific thing */}
                 {isExpanded && (
-                  <div className="bg-[#fafaf8] border-t border-stone-200 p-4 sm:p-5 space-y-3 animate-in fade-in duration-100 text-xs">
-                    {/* Eligibility preview */}
-                    <div className="space-y-1.5">
-                      <div className="font-mono text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
-                        Key Eligibility Criteria
+                  <div className="bg-[#fafaf8] border-t border-stone-200 p-4 sm:p-5 space-y-4 animate-in fade-in duration-150 text-xs">
+                    {/* Summary */}
+                    <div className="space-y-1">
+                      <div className="font-mono text-[10px] font-bold text-stone-400 uppercase tracking-wider">
+                        Overview
                       </div>
-                      <div className="space-y-1">
-                        {item.eligibility.slice(0, 3).map((crit, idx) => (
-                          <div key={idx} className="flex items-start gap-1.5 text-stone-700">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#274e37] shrink-0 mt-0.5" />
-                            <span>{crit}</span>
+                      <p className="text-xs sm:text-sm text-stone-700 leading-relaxed font-sans">
+                        {item.executiveSummary}
+                      </p>
+                    </div>
+
+                    {/* Why founders care */}
+                    <div className="p-3 rounded-lg bg-emerald-50/70 border border-emerald-200/80 text-emerald-950 space-y-1">
+                      <div className="font-mono text-[10px] font-bold text-emerald-800 uppercase tracking-wider">
+                        Founder Advantage
+                      </div>
+                      <p className="text-xs leading-relaxed font-sans">
+                        {item.whyFoundersCare}
+                      </p>
+                    </div>
+
+                    {/* Key Eligibility Criteria */}
+                    <div className="space-y-2">
+                      <div className="font-mono text-[10px] font-bold text-stone-400 uppercase tracking-wider">
+                        Eligibility Checklist
+                      </div>
+                      <div className="space-y-1.5">
+                        {item.eligibility.map((crit, idx) => (
+                          <div key={idx} className="flex items-start gap-2 text-stone-800">
+                            <CheckCircle2 className="w-4 h-4 text-[#274e37] shrink-0 mt-0.5" />
+                            <span className="leading-snug">{crit}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* Quick gotcha */}
+                    {/* Gotchas & Nuances */}
                     {item.gotchasAndNuances.length > 0 && (
-                      <div className="p-2.5 rounded-lg bg-[#fffbeb] border border-[#fde68a] text-amber-900 flex items-start gap-2">
-                        <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
-                        <span className="text-[11px] leading-relaxed">{item.gotchasAndNuances[0]}</span>
+                      <div className="p-3 rounded-lg bg-[#fffbeb] border border-[#fde68a] text-amber-950 flex items-start gap-2">
+                        <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                        <div className="space-y-1">
+                          <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-amber-800 block">
+                            Nuance & Caveat
+                          </span>
+                          <span className="text-xs leading-relaxed">{item.gotchasAndNuances[0]}</span>
+                        </div>
                       </div>
                     )}
 
-                    <div className="pt-1 flex justify-end">
+                    {/* Action Row: Icon-First CTAs */}
+                    <div className="pt-3 border-t border-stone-200 flex items-center justify-between">
+                      <div className="flex items-center space-x-1.5">
+                        <button
+                          type="button"
+                          onClick={() => onToggleBookmark(item.id)}
+                          className={`p-2.5 rounded-lg transition-colors border ${
+                            isBookmarked
+                              ? 'bg-[#f2f7f4] border-[#cce2d5] text-[#274e37]'
+                              : 'bg-white border-stone-200 text-stone-600 hover:text-stone-900'
+                          }`}
+                          aria-label="Save program"
+                          title={isBookmarked ? 'Saved' : 'Save'}
+                        >
+                          {isBookmarked ? (
+                            <BookmarkCheck className="w-4 h-4 fill-[#274e37]" />
+                          ) : (
+                            <Bookmark className="w-4 h-4" />
+                          )}
+                        </button>
+
+                        <a
+                          href={item.officialLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors border border-stone-200"
+                          aria-label="Official Portal"
+                          title="Official Portal"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </div>
+
                       <Link
                         to={`/benefit/${item.slug}`}
-                        className="p-2 rounded-lg bg-[#274e37] text-white hover:bg-[#1c3827] inline-flex items-center justify-center transition-colors"
-                        aria-label="Read Full Blueprint"
+                        className="px-3.5 py-2.5 rounded-lg bg-[#274e37] hover:bg-[#1c3827] text-white transition-colors shadow-xs flex items-center space-x-1 font-serif text-xs font-semibold"
+                        aria-label="View Full Blueprint"
                       >
-                        <ArrowRight className="w-4 h-4" />
+                        <span>Blueprint</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>

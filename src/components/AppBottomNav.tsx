@@ -1,80 +1,82 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutGrid, BookOpen, Users, Sparkles, Lightbulb } from 'lucide-react';
+import { LayoutGrid, BookOpen, Users } from 'lucide-react';
 
 export const AppBottomNav: React.FC = () => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#fdfdfc]/95 backdrop-blur-md border-t border-stone-200/80 sm:hidden pb-safe">
-      <div className="max-w-sm mx-auto px-4 py-2 flex items-center justify-around">
-        {/* Benefits (Catalog) */}
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#fdfdfc]/98 backdrop-blur-md border-t border-stone-200/90 shadow-lg pb-safe">
+      <div className="max-w-md mx-auto px-6 py-2 flex items-center justify-between">
+        {/* 1. Benefits Hub */}
         <NavLink
           to="/"
           end
           className={({ isActive }) =>
-            `p-2.5 rounded-xl flex items-center justify-center transition-colors relative min-w-[44px] min-h-[44px] ${
-              isActive ? 'text-[#274e37] bg-[#f2f7f4]' : 'text-stone-500 hover:text-stone-900 active:bg-stone-100'
+            `flex-1 py-1 px-2 rounded-xl flex flex-col items-center justify-center transition-all min-h-[46px] ${
+              isActive 
+                ? 'text-[#274e37] font-bold' 
+                : 'text-stone-400 hover:text-stone-700 active:text-stone-900'
             }`
           }
           aria-label="Benefits"
-          title="Benefits"
         >
-          <LayoutGrid className="w-5 h-5" />
+          {({ isActive }) => (
+            <>
+              <div className={`p-1 rounded-lg transition-colors ${isActive ? 'bg-[#f2f7f4]' : ''}`}>
+                <LayoutGrid className="w-5 h-5" />
+              </div>
+              <span className="text-[11px] font-serif tracking-tight mt-0.5">
+                Benefits
+              </span>
+            </>
+          )}
         </NavLink>
 
-        {/* Learning */}
+        {/* 2. Learning Hub */}
         <NavLink
           to="/learning"
           className={({ isActive }) =>
-            `p-2.5 rounded-xl flex items-center justify-center transition-colors relative min-w-[44px] min-h-[44px] ${
-              isActive ? 'text-[#274e37] bg-[#f2f7f4]' : 'text-stone-500 hover:text-stone-900 active:bg-stone-100'
+            `flex-1 py-1 px-2 rounded-xl flex flex-col items-center justify-center transition-all min-h-[46px] ${
+              isActive 
+                ? 'text-[#274e37] font-bold' 
+                : 'text-stone-400 hover:text-stone-700 active:text-stone-900'
             }`
           }
           aria-label="Learning"
-          title="Learning"
         >
-          <BookOpen className="w-5 h-5" />
+          {({ isActive }) => (
+            <>
+              <div className={`p-1 rounded-lg transition-colors ${isActive ? 'bg-[#f2f7f4]' : ''}`}>
+                <BookOpen className="w-5 h-5" />
+              </div>
+              <span className="text-[11px] font-serif tracking-tight mt-0.5">
+                Learning
+              </span>
+            </>
+          )}
         </NavLink>
 
-        {/* Networking */}
+        {/* 3. Networking Hub */}
         <NavLink
           to="/networking"
           className={({ isActive }) =>
-            `p-2.5 rounded-xl flex items-center justify-center transition-colors relative min-w-[44px] min-h-[44px] ${
-              isActive ? 'text-[#274e37] bg-[#f2f7f4]' : 'text-stone-500 hover:text-stone-900 active:bg-stone-100'
+            `flex-1 py-1 px-2 rounded-xl flex flex-col items-center justify-center transition-all min-h-[46px] ${
+              isActive 
+                ? 'text-[#274e37] font-bold' 
+                : 'text-stone-400 hover:text-stone-700 active:text-stone-900'
             }`
           }
           aria-label="Networking"
-          title="Networking"
         >
-          <Users className="w-5 h-5" />
-        </NavLink>
-
-        {/* Playbooks */}
-        <NavLink
-          to="/hacks"
-          className={({ isActive }) =>
-            `p-2.5 rounded-xl flex items-center justify-center transition-colors relative min-w-[44px] min-h-[44px] ${
-              isActive ? 'text-[#274e37] bg-[#f2f7f4]' : 'text-stone-500 hover:text-stone-900 active:bg-stone-100'
-            }`
-          }
-          aria-label="Playbooks"
-          title="Playbooks"
-        >
-          <Lightbulb className="w-5 h-5" />
-        </NavLink>
-
-        {/* Tools */}
-        <NavLink
-          to="/tools"
-          className={({ isActive }) =>
-            `p-2.5 rounded-xl flex items-center justify-center transition-colors relative min-w-[44px] min-h-[44px] ${
-              isActive ? 'text-[#274e37] bg-[#f2f7f4]' : 'text-stone-500 hover:text-stone-900 active:bg-stone-100'
-            }`
-          }
-          aria-label="Tools"
-          title="Tools"
-        >
-          <Sparkles className="w-5 h-5" />
+          {({ isActive }) => (
+            <>
+              <div className={`p-1 rounded-lg transition-colors ${isActive ? 'bg-[#f2f7f4]' : ''}`}>
+                <Users className="w-5 h-5" />
+              </div>
+              <span className="text-[11px] font-serif tracking-tight mt-0.5">
+                Networking
+              </span>
+            </>
+          )}
         </NavLink>
       </div>
     </nav>

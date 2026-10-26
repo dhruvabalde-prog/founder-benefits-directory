@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { Search, X, MapPin, ExternalLink, Calendar, Users, Sparkles } from 'lucide-react';
-import { CONFERENCES_DATA, ConferenceEvent } from '../data/conferencesContent';
-import { ExpandableTile } from '../components/ExpandableTile';
+import { Search, X, MapPin, ExternalLink, Calendar, Users, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
+import { CONFERENCES_DATA } from '../data/conferencesContent';
 
 const INDUSTRY_CHIPS = [
   { id: 'all', label: 'All Summits' },
@@ -14,6 +13,11 @@ const INDUSTRY_CHIPS = [
 export const NetworkingPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndustry, setSelectedIndustry] = useState<string>('all');
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const toggleExpand = (id: string) => {
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
 
   const filteredConferences = useMemo(() => {
     return CONFERENCES_DATA.filter((conf) => {
@@ -35,18 +39,8 @@ export const NetworkingPage: React.FC = () => {
   }, [selectedIndustry, searchQuery]);
 
   return (
-    <div className="space-y-4 sm:space-y-5 animate-in fade-in duration-150 pb-20 sm:pb-8">
-      {/* Header */}
-      <div className="flex items-center justify-between pb-2 border-b border-stone-200">
-        <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-900 tracking-tight">
-          Networking
-        </h1>
-        <span className="text-xs font-mono text-stone-500">
-          {filteredConferences.length} Tech Summits
-        </span>
-      </div>
-
-      {/* Search Bar */}
+    <div className="space-y-3 sm:space-y-4 animate-in fade-in duration-150 pb-24 sm:pb-12">
+      {/* Search Input */}
       <div className="relative">
         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
         <input
@@ -75,10 +69,10 @@ export const NetworkingPage: React.FC = () => {
             key={chip.id}
             type="button"
             onClick={() => setSelectedIndustry(chip.id)}
-            className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors font-sans ${
+            className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors font-mono text-[11px] ${
               selectedIndustry === chip.id
                 ? 'bg-[#274e37] text-white font-semibold shadow-xs'
-                : 'bg-white text-stone-600 hover:text-stone-900 border border-stone-200 hover:border-stone-300'
+                : 'bg-white text-stone-600 hover:text-stone-900 border border-stone-200'
             }`}
           >
             {chip.label}
@@ -86,79 +80,105 @@ export const NetworkingPage: React.FC = () => {
         ))}
       </div>
 
-      {/* Summits List */}
-      <div className="space-y-3">
-        {filteredConferences.map((conf) => (
-          <div
-            key={conf.id}
-            className="bg-white border border-stone-200 rounded-xl p-4 sm:p-5 space-y-3 shadow-xs"
-          >
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <div className="flex items-center space-x-2">
-                <span className="px-2 py-0.5 text-[10px] font-mono font-semibold rounded bg-[#f2f7f4] text-[#274e37] border border-[#cce2d5]">
-                  {conf.industryLabel}
-                </span>
-                <span className="text-xs font-mono text-stone-500 flex items-center space-x-1">
-                  <MapPin className="w-3 h-3 text-stone-400" />
-                  <span>{conf.city}</span>
-                </span>
-              </div>
-              <span className="text-xs font-mono font-semibold text-stone-700 flex items-center space-x-1">
-                <Calendar className="w-3 h-3 text-stone-400" />
-                <span>{conf.typicalMonth} ({conf.frequency})</span>
-              </span>
-            </div>
+      {/* Counter */}
+      <div className="flex items-center justify-between text-xs font-mono text-stone-500 px-1">
+        <span>{filteredConferences.length} tech summits</span>
+      </div>
 
-            <div>
-              <h2 className="text-base sm:text-lg font-serif font-bold text-stone-900 tracking-tight">
-                {conf.name}
-              </h2>
-              <p className="text-xs sm:text-sm text-stone-600 mt-1 font-sans leading-relaxed">
-                {conf.summary}
-              </p>
-            </div>
+      {/* Long Rectangular Tiles Arranged Vertically */}
+      <div className="space-y-2">
+        {filteredConferences.map((conf) => {
+          const isExpanded = expandedId === conf.id;
 
-            {/* Free Entry & Discount Hack (Ghar Expand Tile) */}
-            <ExpandableTile
-              title="Free Entry & Registration Hack"
-              variant="highlight"
-              defaultOpen={true}
-              icon={<Sparkles className="w-4 h-4 text-[#274e37]" />}
+          return (
+            <div
+              key={conf.id}
+              className="bg-white border border-stone-200 hover:border-stone-400 rounded-xl transition-all shadow-xs overflow-hidden"
             >
-              <div className="space-y-2 pt-2 text-xs font-sans text-stone-800">
-                <div className="p-3 bg-white/90 rounded-lg border border-[#cce2d5] leading-relaxed">
-                  <span className="font-mono text-[10px] uppercase font-bold text-[#274e37] block mb-1">
-                    How Founders Enter For Free
-                  </span>
-                  <p>{conf.freeEntryHack}</p>
-                </div>
-
-                <div className="flex items-center space-x-2 text-stone-600 pt-1">
-                  <Users className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-                  <span>Target Audience: {conf.targetAudience.join(' • ')}</span>
-                </div>
-              </div>
-            </ExpandableTile>
-
-            {/* Bottom Actions */}
-            <div className="pt-2 flex items-center justify-between border-t border-stone-100">
-              <span className="text-xs font-mono text-stone-400">
-                {conf.officialDomain}
-              </span>
-
-              <a
-                href={conf.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-[#274e37] hover:bg-[#1c3827] text-white rounded-lg transition-colors shadow-xs inline-flex items-center space-x-1"
-                aria-label="Visit Official Website"
-                title="Visit Official Summit Portal"
+              {/* Header Tile (Always Visible) */}
+              <button
+                type="button"
+                onClick={() => toggleExpand(conf.id)}
+                className="w-full p-3.5 sm:p-4 text-left flex items-center justify-between gap-3 hover:bg-stone-50/60 active:bg-stone-100/50 transition-colors"
               >
-                <ExternalLink className="w-4 h-4" />
-              </a>
+                <div className="flex-1 min-w-0 pr-1">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <span className="px-2 py-0.5 text-[9px] sm:text-[10px] font-mono font-semibold rounded bg-[#f2f7f4] text-[#274e37] border border-[#cce2d5] shrink-0">
+                      {conf.industryLabel}
+                    </span>
+                    <span className="text-[10px] sm:text-xs font-mono text-stone-500 flex items-center space-x-1 shrink-0">
+                      <MapPin className="w-3 h-3 text-stone-400" />
+                      <span>{conf.city}</span>
+                    </span>
+                    <span className="text-[10px] sm:text-xs font-mono font-semibold text-stone-700 shrink-0 ml-auto sm:ml-0 flex items-center space-x-1">
+                      <Calendar className="w-3 h-3 text-stone-400" />
+                      <span>{conf.typicalMonth}</span>
+                    </span>
+                  </div>
+
+                  <div className="text-sm sm:text-base font-serif font-bold text-stone-900 leading-snug">
+                    {conf.name}
+                  </div>
+                </div>
+
+                <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center shrink-0 text-stone-600 transition-transform">
+                  {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                </div>
+              </button>
+
+              {/* Expanded View */}
+              {isExpanded && (
+                <div className="bg-[#fafaf8] border-t border-stone-200 p-4 sm:p-5 space-y-3.5 animate-in fade-in duration-150 text-xs">
+                  {/* Summary */}
+                  <div className="space-y-1">
+                    <div className="font-mono text-[10px] font-bold text-stone-400 uppercase tracking-wider">
+                      Summit Overview
+                    </div>
+                    <p className="text-xs sm:text-sm text-stone-700 leading-relaxed font-sans">
+                      {conf.summary}
+                    </p>
+                  </div>
+
+                  {/* Free Entry & Registration Hack */}
+                  <div className="p-3 bg-white rounded-lg border border-[#cce2d5] space-y-1.5 shadow-2xs">
+                    <div className="flex items-center space-x-1.5 text-[#274e37]">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span className="font-mono text-[10px] uppercase font-bold tracking-wider">
+                        How Founders Enter For Free
+                      </span>
+                    </div>
+                    <p className="text-xs text-stone-800 font-sans leading-relaxed">
+                      {conf.freeEntryHack}
+                    </p>
+                  </div>
+
+                  {/* Audience */}
+                  <div className="flex items-center space-x-2 text-stone-600 text-xs bg-stone-100/70 p-2.5 rounded-lg border border-stone-200">
+                    <Users className="w-4 h-4 text-stone-400 shrink-0" />
+                    <span>Target Cohort: {conf.targetAudience.join(' • ')}</span>
+                  </div>
+
+                  {/* Bottom Actions */}
+                  <div className="pt-2 flex items-center justify-between border-t border-stone-200">
+                    <span className="text-[11px] font-mono text-stone-400">
+                      {conf.officialDomain}
+                    </span>
+
+                    <a
+                      href={conf.websiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-[#274e37] hover:bg-[#1c3827] text-white rounded-lg transition-colors shadow-xs inline-flex items-center space-x-1.5 font-serif text-xs font-semibold"
+                    >
+                      <span>Registration</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
